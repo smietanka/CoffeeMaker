@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>FSharp.Actor</name></assembly>
+<members>
+<member name="M:FSharp.Actor.Types.ReplyChannel`1.Reply(`0)">
+<summary>
+ Send a reply back to the caller
+</summary>
+</member>
+<member name="T:FSharp.Actor.Types.ReplyChannel`1">
+<summary>
+ The channel to receive the reply from
+</summary>
+</member>
+</members>
+</doc>

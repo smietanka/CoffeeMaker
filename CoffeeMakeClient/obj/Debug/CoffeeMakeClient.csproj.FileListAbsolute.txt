@@ -1,0 +1,2 @@
+D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMakeClient\bin\Debug\CoffeeMakeClient.exe.config
+D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMakeClient\obj\Debug\CoffeeMakeClient.csprojResolveAssemblyReference.cache

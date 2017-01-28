@@ -1,0 +1,7 @@
+D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMakeTest\bin\Debug\CoffeeMakeTest.dll
+D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMakeTest\bin\Debug\CoffeeMakeTest.pdb
+D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMakeTest\obj\Debug\CoffeeMakeTest.csprojResolveAssemblyReference.cache
+D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMakeTest\obj\Debug\CoffeeMakeTest.dll
+D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMakeTest\obj\Debug\CoffeeMakeTest.pdb
+D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMakeTest\bin\Debug\CoffeeMake.exe
+D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMakeTest\bin\Debug\CoffeeMake.pdb
