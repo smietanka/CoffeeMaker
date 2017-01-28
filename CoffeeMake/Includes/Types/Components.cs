@@ -16,7 +16,7 @@ namespace CoffeeMake.Includes.Types
         }
          public IComponent Get(string name)
          {
-             var compon = this.AllComponents.Where(x => x.GetName().Equals(name)).FirstOrDefault();
+             var compon = this.AllComponents.Where(x => x.Name.GetName().Equals(name)).FirstOrDefault();
              if (compon == null)
              {
                  throw new KeyNotFoundException("Nie znaleziono skladnika o nazwie: " + name);
