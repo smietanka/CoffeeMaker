@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CoffeeMake.Interfaces;
 using CoffeeMake.Includes.Types.FDevices;
 using CoffeeMake.Includes.Types;
-using CoffeeMake.Includes.Types.ComponentType;
 
 namespace CoffeeMakeTest
 {
@@ -15,8 +14,7 @@ namespace CoffeeMakeTest
         [TestMethod, TestCategory("HeatTest")]
         public void HeatComponentTest()
         {
-            IComponentType exampleType = new Dry();
-            IComponent exampleComponentn = new Component(TEST_NAME, exampleType, false);
+            Component exampleComponentn = new Component(TEST_NAME, ComponentType.DRY, false);
 
             IHeater heat = new Heater(TEST_NAME);
             Assert.IsTrue(heat.Heat(exampleComponentn, 100));
@@ -29,16 +27,6 @@ namespace CoffeeMakeTest
             {
                 Assert.IsTrue(true);
             }
-        }
-
-        [TestMethod, TestCategory("HeatTest")]
-        public void HeatNameTest()
-        {
-            IHeater heat = new Heater();
-            Assert.AreEqual(heat.GetName(), "Brak");
-
-            heat.SetName(TEST_NAME);
-            Assert.AreEqual(TEST_NAME, heat.GetName());
         }
     }
 }

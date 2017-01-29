@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoffeeMake.Includes.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace CoffeeMake.Interfaces
 {
     public interface IGrinder : IDevice
     {
-        bool Grind(IComponent component);
+        bool Grind(Component component);
     }
 }

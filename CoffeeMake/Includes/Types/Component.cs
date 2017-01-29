@@ -1,5 +1,4 @@
-﻿using CoffeeMake.Includes.Types.ComponentType;
-using CoffeeMake.Interfaces;
+﻿using CoffeeMake.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoffeeMake.Includes.Types
 {
-    public class Component : IComponent
+    public class Component
     {
         private string _name;
         public string Name
@@ -18,74 +17,36 @@ namespace CoffeeMake.Includes.Types
             {
                 if(string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("Pusta nazwa");
+                    throw new ArgumentNullException("Nazwa jest pusta lub nullem.");
                 }
                 _name = value;
             }
         }
-        private IComponentType Type;
-        private bool Grindable;
-        private float Temperature;
 
+        public ComponentType Type { get; set; }
 
-        public Component()
+        public bool Grindable { get; set; }
+
+        private float _temperature;
+        public float Temperature
         {
-            this._name = "brak";
-            this.Type = new Dry();
-            this.Grindable = false;
-            this.Temperature = 0;
-        }
-        public Component(string name, IComponentType type, bool grindable)
-        {
-            if (string.IsNullOrEmpty(name) || type.Equals(null))
+            get { return _temperature; }
+            set
             {
-                throw new ArgumentNullException("Pusta nazwa lub typ jest nullem");
+                if (value < 0)
+                {
+                    throw new ArgumentException("Temperatura jest za niska");
+                }
+                _temperature = value;
             }
-            if(type.GetType().IsEquivalentTo(new Liquid().GetType()))
-            {
-                if (grindable) throw new ArgumentException("Ciecz nie moze byc mielona.");
-            }
-
-            this._name = name;
-            this.Type = type;
-            this.Grindable = grindable;
-        }
-        public IComponentType GetComponentType()
-        {
-            return this.Type;
         }
 
-        public void SetComponentType(IComponentType type)
+        public Component(string name, ComponentType type, bool grindable)
         {
-            if (type == null)
-            {
-                throw new ArgumentNullException("Typ jest nullem");
-            }
-            this.Type = type;
-        }
-
-        public void SetGrindable(bool grindable)
-        {
-            this.Grindable = grindable;
-        }
-
-        public bool GetGrindable()
-        {
-            return this.Grindable;
-        }
-
-        public void SetTemperature(float temperature)
-        {
-            if(temperature < 0)
-            {
-                throw new ArgumentException("Temperatura jest za niska");
-            }
-            this.Temperature = temperature;
-        }
-
-        public float GetTemperature()
-        {
-            return Temperature;
+            Name = name;
+            Type = type;
+            Grindable = grindable;
+            Temperature = 0;
         }
     }
 }

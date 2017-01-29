@@ -1,5 +1,4 @@
-﻿using CoffeeMake.Includes.Types.ComponentType;
-using CoffeeMake.Includes.Types.FDevices;
+﻿using CoffeeMake.Includes.Types.FDevices;
 using CoffeeMake.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,91 +8,89 @@ using System.Threading.Tasks;
 
 namespace CoffeeMake.Includes.Types
 {
+    // TODO: Usunac if gdzie sprawdzamy wszystkei zmiennee. (if cos I cos I cos then) ktorys z parametrow zal
+    // TODO: cos z listami ogarnac? to trzeba kurde.
+    // Przelozyc WriteLiny na GUIca
+    // TODO: Sprobowac cos zrobic z component definition, tj. cos z ta temperatura. bo nie wszystkie skladniki potrzebuja zmienci temperature. Np mąka nie jest potrzebna do podgrzewania
+    // czy cos.. wiec nie ma sensu zeby trzymala takie pole.
+    //TODO do zmiany jeszcze touch
     public class CoffeeMaker : IExpress
     {
-        private string Name = "Ekspres";
         private Devices Devices;
         private Components Components;
         private Tanks Tanks;
-        private Touch TouchScreen;
+
+        private Touch _touchScreen;
+        public Touch Touch
+        {
+            get { return _touchScreen; }
+            set
+            {
+                if(value == null)
+                {
+                    throw new ArgumentNullException("Panel dotykowy jest nullsem");
+                }
+                _touchScreen = value;
+            }
+        }
 
         public CoffeeMaker()
         {
-            this.Devices = new Devices();
-            this.Components = new Components();
-            this.Tanks = new Tanks();
-            this.TouchScreen = new Touch(Constans.TOUCH_NAME);
+            Devices = new Devices();
+            Components = new Components();
+            Tanks = new Tanks();
+            Touch = new Touch(Constans.TOUCH_NAME);
         }
 
         public void Do(Option option)
         {
-            IHead head = this.Devices.GetHead();
+            IHead head = Devices.GetHead();
 
-            Recipe drinkRecipe = option.GetRecipe();
-            IList<ComponentDefinition> drinkComponents = drinkRecipe.GetComponents();
+            option.Recipe.ShowComponentsToConsole();
 
-            drinkRecipe.ShowComponentsToConsole();
-
-            foreach (ComponentDefinition componentDefinition in drinkComponents)
+            foreach (ComponentDefinition compDefinition in option.Recipe.RecipeComponents)
             {
-                string componentName = componentDefinition.GetComponent();
-                ITank tankWithComponent = Tanks.Get(componentName);
-                string componentTypeName = tankWithComponent.GetComponentType().GetName();
+                ITank tankWithComponent = Tanks.Get(compDefinition.ComponentName);
                 
-                if(tankWithComponent.GetComponent().GetGrindable())
+                if(tankWithComponent.Component.Grindable)
                 {
-                    IGrinder grinder = this.Devices.GetGrinder();
-                    grinder.Grind(tankWithComponent.GetComponent());
+                    IGrinder grinder = Devices.GetGrinder();
+                    grinder.Grind(tankWithComponent.Component);
                 }
 
-                if(tankWithComponent.GetComponentType().GetType().IsEquivalentTo(new Liquid().GetType()))
+                if(tankWithComponent.Type.Equals(ComponentType.LIQUID))
                 {
-                    IHeater heater = this.Devices.GetHeater();
-                    var componentTemperature = componentDefinition.GetTemperature();
+                    IHeater heater = Devices.GetHeater();
+                    var componentTemperature = compDefinition.Temperature;
 
-                    heater.Heat(tankWithComponent.GetComponent(), componentDefinition.GetTemperature());
+                    heater.Heat(tankWithComponent.Component, compDefinition.Temperature);
                 }
-                head.AddToCup(tankWithComponent, componentDefinition.GetAmount());
+                head.AddToCup(tankWithComponent, compDefinition.Amount);
             }
 
-            head.AddToCup(Tanks.Get(Constans.SUGAR), TouchScreen.GetSugar());
-            head.AddToCup(Tanks.Get(Constans.MILK), TouchScreen.GetMilk());
-        }
-
-        public string GetName()
-        {
-            return this.Name;
-        }
-
-        public void SetName(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException("Nazwa jest pusta lub nullem");
-            }
-            this.Name = name;
+            head.AddToCup(Tanks.Get(Constans.SUGAR), _touchScreen.GetSugar());
+            head.AddToCup(Tanks.Get(Constans.MILK), _touchScreen.GetMilk());
         }
 
         public void ShowOptions()
         {
-            TouchScreen.ShowOptions();
-        }
-
-        public Touch GetTouch()
-        {
-            return TouchScreen;
+            _touchScreen.ShowOptions();
         }
 
         public void AddDevice(IDevice device)
         {
-            this.Devices.Add(device);
+            Devices.Add(device);
         }
 
-        public void AddTank(string name, IComponentType type, int capacity, bool grindable)
+        public void AddTank(string name, ComponentType type, int capacity, bool grindable)
         {
-            if(type == null || string.IsNullOrEmpty(name) || capacity < 0)
+            if(string.IsNullOrEmpty(name))
             {
-                throw new ArgumentException("Któryś z parametrów jest błędny.");
+                throw new ArgumentNullException("Nazwa jest nullem.");
+            }
+            if(capacity < 0)
+            {
+                throw new ArgumentException("Zła wartość pojemności.");
             }
 
             Component component = new Component(name, type, grindable);

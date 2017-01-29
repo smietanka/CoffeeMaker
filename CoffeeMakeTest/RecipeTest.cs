@@ -17,7 +17,7 @@ namespace CoffeeMakeTest
         {
             Recipe recipe = new Recipe();
 
-            Assert.IsTrue(!recipe.GetComponents().Any());
+            Assert.IsTrue(!recipe.RecipeComponents.Any());
 
         }
 
@@ -37,11 +37,11 @@ namespace CoffeeMakeTest
             }
 
             var compDef = new ComponentDefinition(TEST_NAME, 50);
-            Assert.AreEqual(50, compDef.GetAmount());
+            Assert.AreEqual(50, compDef.Amount);
 
             recipe.AddComponentDefinition(compDef);
 
-            Assert.IsTrue(recipe.GetComponents().Any());
+            Assert.IsTrue(recipe.RecipeComponents.Any());
         }
     }
 }

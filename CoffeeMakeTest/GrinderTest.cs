@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CoffeeMake.Interfaces;
 using CoffeeMake.Includes.Types.FDevices;
-using CoffeeMake.Includes.Types.ComponentType;
 using CoffeeMake.Includes.Types;
 
 namespace CoffeeMakeTest
@@ -14,13 +13,9 @@ namespace CoffeeMakeTest
         [TestMethod, TestCategory("GrinderTest")]
         public void GrinderNameTest()
         {
-            IGrinder grind = new Grinder();
-
-            Assert.AreEqual("Brak", grind.GetName());
-
             try
             {
-                grind.SetName(null);
+                IGrinder grind = new Grinder(null);
                 Assert.Fail();
             }
             catch (ArgumentNullException e)
@@ -28,9 +23,8 @@ namespace CoffeeMakeTest
                 Assert.IsTrue(true);
             }
 
-            grind.SetName(TEST_NAME);
-
-            Assert.AreEqual(grind.GetName(), TEST_NAME);
+            IGrinder grind2 = new Grinder(TEST_NAME);
+            Assert.AreEqual(grind2.Name, TEST_NAME);
         }
 
         [TestMethod, TestCategory("GrinderTest")]
@@ -38,10 +32,9 @@ namespace CoffeeMakeTest
         {
             IGrinder grinder = new Grinder(TEST_NAME);
 
-            IComponentType exampleType = new Dry();
             try
             {
-                IComponent notGrindableComp = new Component(TEST_NAME, exampleType, false);
+                Component notGrindableComp = new Component(TEST_NAME, ComponentType.DRY, false);
                 grinder.Grind(notGrindableComp);
                 Assert.Fail();
             }
@@ -50,10 +43,9 @@ namespace CoffeeMakeTest
                 Assert.IsTrue(true);
             }
 
-            IComponentType exampleLiquidType = new Liquid();
             try
             {
-                IComponent notGrindableComp2 = new Component(TEST_NAME, exampleLiquidType, true);
+                Component notGrindableComp2 = new Component(TEST_NAME, ComponentType.LIQUID, true);
                 grinder.Grind(notGrindableComp2);
                 Assert.Fail();
             }
@@ -62,7 +54,7 @@ namespace CoffeeMakeTest
                 Assert.IsTrue(true);
             }
 
-            IComponent notGrindableComp3 = new Component(TEST_NAME, exampleLiquidType, false);
+            Component notGrindableComp3 = new Component(TEST_NAME, ComponentType.LIQUID, false);
             try
             {
                 grinder.Grind(notGrindableComp3);
@@ -73,7 +65,7 @@ namespace CoffeeMakeTest
                 Assert.IsTrue(true);
             }
 
-            IComponent grindableComp = new Component(TEST_NAME, new Dry(), true);
+            Component grindableComp = new Component(TEST_NAME, ComponentType.DRY, true);
             Assert.IsTrue(grinder.Grind(grindableComp));
         }
     }

@@ -1,5 +1,4 @@
 ﻿using CoffeeMake.Includes.Types;
-using CoffeeMake.Includes.Types.ComponentType;
 using CoffeeMake.Includes.Types.FDevices;
 using CoffeeMake.Interfaces;
 using System;
@@ -27,15 +26,15 @@ namespace CoffeeMake
         {
             IExpress coffeeMaker = new CoffeeMaker();
 
-            Touch touchScreen = coffeeMaker.GetTouch();
+            Touch touchScreen = coffeeMaker.Touch;
 
-            coffeeMaker.AddTank(Constans.COFFEE, new Dry(), 1000, true);
+            coffeeMaker.AddTank(Constans.COFFEE, ComponentType.DRY, 1000, true);
 
-            coffeeMaker.AddTank(Constans.SUGAR, new Dry(), 1000, false);
+            coffeeMaker.AddTank(Constans.SUGAR, ComponentType.DRY, 1000, false);
 
-            coffeeMaker.AddTank(Constans.WATER, new Liquid(), 5000, false);
+            coffeeMaker.AddTank(Constans.WATER, ComponentType.LIQUID, 5000, false);
 
-            coffeeMaker.AddTank(Constans.MILK, new Liquid(), 4000, false);
+            coffeeMaker.AddTank(Constans.MILK, ComponentType.LIQUID, 4000, false);
 
             coffeeMaker.AddDevice(new Heater(Constans.HEATER_NAME));
             coffeeMaker.AddDevice(new Head(Constans.HEAD_NAME));
@@ -45,13 +44,13 @@ namespace CoffeeMake
             Recipe firstOptionRecipe = new Recipe();
             firstOptionRecipe.AddComponentDefinition(new ComponentDefinition(Constans.COFFEE, 30));
             firstOptionRecipe.AddComponentDefinition(new ComponentDefinition(Constans.WATER, 100, 200));
-            firstOption.SetRecipe(firstOptionRecipe);
+            firstOption.Recipe = firstOptionRecipe;
             touchScreen.AddOption(firstOption);
 
             var secondOption = new Option("sama woda goraca");
             Recipe secondOptionRecipe = new Recipe();
             secondOptionRecipe.AddComponentDefinition(new ComponentDefinition(Constans.WATER, 100, 200));
-            secondOption.SetRecipe(secondOptionRecipe);
+            secondOption.Recipe = secondOptionRecipe;
             touchScreen.AddOption(secondOption);
 
             coffeeMaker.ShowOptions();

@@ -9,75 +9,63 @@ namespace CoffeeMake.Includes.Types
 {
     public class ComponentDefinition
     {
-        private string ComponentName;
-        private int Temperature = 0;
-        private int Amount;
-        public ComponentDefinition()
+        private string _componentName;
+        public string ComponentName
         {
-            this.ComponentName = "";
-            this.Temperature = 0;
-            this.Amount = 0;
+            get { return _componentName; }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("Nazwa składnika jest pusta lub nullem.");
+                }
+                _componentName = value;
+            }
+        }
+
+        private int _temperature = 0;
+        public int Temperature
+        {
+            get { return _temperature; }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Ujemny parametr");
+                }
+                _temperature = value;
+            }
+        }
+
+        private int _amount;
+        public int Amount
+        {
+            get { return _amount; }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException("Ujemny parametr");
+                }
+                _amount = value;
+            }
         }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="component">Składnik</param>
+        /// <param name="componentName">Składnik</param>
         /// <param name="temperature">Temperatura. Musi być większa od 0</param>
         /// <param name="amount">Ilość. Musi być większa od 0</param>
-        public ComponentDefinition(string component, int temperature, int amount)
+        public ComponentDefinition(string componentName, int temperature, int amount)
         {
-            if (string.IsNullOrEmpty(component) || temperature < 0 || amount < 0)
-            {
-                throw new ArgumentException("Któryś z parametrów jest zły.");
-            }
-            this.Temperature = temperature;
-            this.Amount = amount;
-            this.ComponentName = component;
+            ComponentName = componentName;
+            Temperature = temperature;
+            Amount = amount;
         }
-        public ComponentDefinition(string component, int amount)
+        public ComponentDefinition(string componentName, int amount)
         {
-            if (string.IsNullOrEmpty(component) || amount < 0)
-            {
-                throw new ArgumentException("Któryś z parametrów jest zły.");
-            }
-            this.Amount = amount;
-            this.ComponentName = component;
-        }
-        public void SetTemperature(int temperature)
-        {
-            if (temperature < 0)
-            {
-                throw new ArgumentException("Ujemny parametr");
-            }
-            this.Temperature = temperature;
-        }
-        public void SetComponent(string component)
-        {
-            if(string.IsNullOrEmpty(component))
-            {
-                throw new ArgumentNullException("Składnik jest nullem");
-            }
-            this.ComponentName = component;
-        }
-        public void SetAmount(int amount)
-        {
-            if (amount < 0)
-            {
-                throw new ArgumentException("Ujemny parametr");
-            }
-            this.Amount = amount;
-        }
-        public string GetComponent()
-        {
-            return this.ComponentName;
-        }
-        public int GetTemperature()
-        {
-            return this.Temperature;
-        }
-        public int GetAmount()
-        {
-            return this.Amount;
+            ComponentName = componentName;
+            Amount = amount;
         }
     }
 }

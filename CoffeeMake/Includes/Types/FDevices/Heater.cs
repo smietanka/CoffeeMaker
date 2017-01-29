@@ -1,5 +1,4 @@
-﻿using CoffeeMake.Includes.Types.ComponentType;
-using CoffeeMake.Interfaces;
+﻿using CoffeeMake.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,55 +9,47 @@ namespace CoffeeMake.Includes.Types.FDevices
 {
     public class Heater : IHeater
     {
-        private string Name;
-        public Heater()
+        private string _name;
+        public string Name
         {
-            this.Name = "Brak";
+            get { return _name; }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("Nazwa jest pusta lub nullem");
+                }
+                _name = value;
+            }
         }
 
         public Heater(string name)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException("Nazwa jest pusta lub nullem");
-            }
-            this.Name = name;
+            Name = name;
         }
-        public bool Heat(IComponent component, float temperature)
+
+        public bool Heat(Component component, float temperature)
         {
-            if (temperature < 0 || component == null)
+            if(component == null)
             {
-                throw new ArgumentNullException("temperatura jest za niska lub skladnik jest pusty");
+                throw new ArgumentNullException("Składnik jest nullem.");
             }
 
-            if(component.GetType().IsEquivalentTo(new Dry().GetType()))
+            if (temperature < 0)
+            {
+                throw new ArgumentNullException("Temperatura jest za niska.");
+            }
+
+            if(component.Equals(ComponentType.DRY))
             {
                 throw new ArgumentException("Suchy skladnik nie moze byc podgrzewany.");
             }
-            Console.WriteLine("Poczatkowa temperatura skladnika: " + component.GetTemperature());
-            Console.WriteLine(string.Format("Podgrzewam {0} na {1} stopni", component.GetName(), temperature));
-            component.SetTemperature(temperature);
-            Console.WriteLine("Koncowa temperatura skladnika: " + component.GetTemperature());
+
+            Console.WriteLine("Poczatkowa temperatura skladnika: " + component.Temperature);
+            Console.WriteLine(string.Format("Podgrzewam {0} na {1} stopni", component.Name, temperature));
+            component.Temperature = temperature;
+            Console.WriteLine("Koncowa temperatura skladnika: " + component.Temperature);
             return true;
-        }
-
-        public void RunJob()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetName(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException("Nazwa jest pusta lub nullem");
-            }
-            this.Name = name;
-        }
-
-        public string GetName()
-        {
-            return this.Name;
         }
     }
 }

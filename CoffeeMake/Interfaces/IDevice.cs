@@ -8,8 +8,6 @@ namespace CoffeeMake.Interfaces
 {
     public interface IDevice
     {
-        void RunJob();
-        void SetName(string name);
-        string GetName();
+        string Name { get; set; }
     }
 }

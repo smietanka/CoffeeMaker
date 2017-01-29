@@ -10,11 +10,10 @@ namespace CoffeeMake.Interfaces
     public interface IExpress
     {
         void Do(Option option);
-        string GetName();
-        void SetName(string name);
+        Touch Touch { get; }
+
         void ShowOptions();
-        Touch GetTouch();
-        void AddTank(string name, IComponentType type, int capacity, bool grindable);
+        void AddTank(string name, ComponentType type, int capacity, bool grindable);
         ITank GetTank(string name);
         void AddDevice(IDevice device);
     }

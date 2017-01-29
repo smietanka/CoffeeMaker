@@ -8,46 +8,39 @@ namespace CoffeeMake.Includes.Types
 {
     public class Option
     {
-        private string Name;
-        private Recipe Recipe;
-
-        public Option()
-        {
-            this.Name = "brak";
-            this.Recipe = new Recipe();
+        private string _name;
+        public string Name {
+            get { return _name; }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("Pusta nazwa");
+                }
+                _name = value;
+            }
         }
+
+        private Recipe _recipe;
+        public Recipe Recipe {
+            get { return _recipe; }
+            set
+            {
+                if (value.Equals(null))
+                {
+                    throw new ArgumentNullException("Pusta receptura");
+                }
+                _recipe = value;
+            }
+        }
+
         public Option(string name)
         {
             if(string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException("Nazwa jest nullem lub pusta");
             }
-            this.Name = name;
-        }
-        public string GetName()
-        {
-            return this.Name;
-        }
-
-        public Recipe GetRecipe()
-        {
-            return this.Recipe;
-        }
-        public void SetName(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException("Pusta nazwa");
-            }
-            this.Name = name;
-        }
-        public void SetRecipe(Recipe recipe)
-        {
-            if (recipe.Equals(null))
-            {
-                throw new ArgumentNullException("Pusta receptura");
-            }
-            this.Recipe = recipe;
+            this._name = name;
         }
     }
 }

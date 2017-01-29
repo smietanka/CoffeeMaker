@@ -13,16 +13,16 @@ namespace CoffeeMakeTest
         public void ComponentDefinitionAmount()
         {
             var compDef = new ComponentDefinition(TEST_NAME, 50);
-            Assert.AreEqual(50, compDef.GetAmount());
+            Assert.AreEqual(50, compDef.Amount);
         }
 
         [TestMethod, TestCategory("ComponentDefinitionTest")]
         public void ComponentDefinitionAmountAndTemp()
         {
             var compDef = new ComponentDefinition(TEST_NAME, 50, 100);
-            Assert.AreEqual(100, compDef.GetAmount());
+            Assert.AreEqual(100, compDef.Amount);
 
-            Assert.AreEqual(50, compDef.GetTemperature());
+            Assert.AreEqual(50, compDef.Temperature);
         }
     }
 }

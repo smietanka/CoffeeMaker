@@ -9,26 +9,30 @@ namespace CoffeeMake.Includes.Types
 {
     public class Touch : ITouch, IDevice
     {
-        private List<Option> Options;
-        private string Name;
+        private IList<Option> Options = new List<Option>();
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("Nazwa jest pusta lub nullem");
+                }
+                _name = value;
+            }
+        }
+
         private int Sugar = 0;
         private int Milk = 0;
 
         private Option CurrentOption;
 
-        public Touch()
-        {
-            this.Options = new List<Option>();
-            this.Name = "Brak";
-        }
         public Touch(string name)
         {
-            this.Options = new List<Option>();
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException("Nazwa jest pusta lub nullem");
-            }
-            this.Name = name;
+            Name = name;
         }
 
         public void AddOption(Option option)
@@ -36,20 +40,21 @@ namespace CoffeeMake.Includes.Types
             if (option.Equals(null))
             {
                 throw new ArgumentNullException("opcja jest nullem");
-
             }
             this.Options.Add(option);
-            Console.WriteLine(string.Format("Dodalo opcje {0}", option.GetName()));
+            Console.WriteLine(string.Format("Dodalo opcje {0}", option.Name));
         }
+
         public Option GetOption(string name)
         {
-            Option result = this.Options.Where(x => x.GetName().Equals(name)).FirstOrDefault();
+            Option result = this.Options.Where(x => x.Name.Equals(name)).FirstOrDefault();
             if (result == null)
             {
                 throw new KeyNotFoundException("Nie znalazlo opcji o danej nazwie.");
             }
             return result;
         }
+
         public Option GetCurrentOption()
         {
             if(CurrentOption == null)
@@ -105,27 +110,9 @@ namespace CoffeeMake.Includes.Types
                 if (!this.Options.Any()) throw new IndexOutOfRangeException("Brak opcji do wyswietlenia");
                 else
                 {
-                    Console.WriteLine("Ile cukru [0-100]: ");
-                    int sugarIn = CheckInLine(Console.ReadLine());
-                    while (!SetSugar(sugarIn))
-                    {
-                        Console.WriteLine("Zle wpisany cukier");
-                        Console.WriteLine("Wprowadz jeszcze raz: ");
-                        sugarIn = CheckInLine(Console.ReadLine());
-                    }
-
-                    Console.WriteLine("Ile mleka [0-100]: ");
-                    int milkIn = CheckInLine(Console.ReadLine());
-                    while (!SetMilk(milkIn))
-                    {
-                        Console.WriteLine("Zle wpisane mleko");
-                        Console.WriteLine("Wprowadz jeszcze raz: ");
-                        milkIn = CheckInLine(Console.ReadLine());
-                    }
-
                     foreach (var eachOption in this.Options)
                     {
-                        Console.WriteLine(string.Format("{0}. {1}.", index, eachOption.GetName()));
+                        Console.WriteLine(string.Format("{0}. {1}.", index, eachOption.Name));
                         indexedOptions.Add(index, eachOption);
                         index++;
                     }
@@ -160,33 +147,31 @@ namespace CoffeeMake.Includes.Types
                             }
                         }
                     }
-
                     Console.WriteLine("Wybrales/as poprawnie napoj");
+
+                    Console.WriteLine("Ile cukru [0-100]: ");
+                    int sugarIn = CheckInLine(Console.ReadLine());
+                    while (!SetSugar(sugarIn))
+                    {
+                        Console.WriteLine("Zle wpisany cukier");
+                        Console.WriteLine("Wprowadz jeszcze raz: ");
+                        sugarIn = CheckInLine(Console.ReadLine());
+                    }
+
+                    Console.WriteLine("Ile mleka [0-100]: ");
+                    int milkIn = CheckInLine(Console.ReadLine());
+                    while (!SetMilk(milkIn))
+                    {
+                        Console.WriteLine("Zle wpisane mleko");
+                        Console.WriteLine("Wprowadz jeszcze raz: ");
+                        milkIn = CheckInLine(Console.ReadLine());
+                    }
                 }
             }
             catch (IndexOutOfRangeException e)
             {
                 throw new IndexOutOfRangeException(e.Message);
             }
-        }
-
-        public void RunJob()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetName(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException("Nazwa jest pusta lub nullem");
-            }
-            this.Name = name;
-        }
-
-        public string GetName()
-        {
-            return this.Name;
         }
     }
 }

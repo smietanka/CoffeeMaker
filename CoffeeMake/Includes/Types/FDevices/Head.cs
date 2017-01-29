@@ -9,51 +9,44 @@ namespace CoffeeMake.Includes.Types.FDevices
 {
     public class Head : IHead
     {
-        private string Name;
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("Nazwa jest pusta lub nullem");
+                }
+                _name = value;
+            }
+        }
 
         public Head(string name)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException("Nazwa jest pusta lub nullem");
-            }
-            this.Name = name;
-        }
-        public void AddToCup(ITank component, int capacity)
-        {
-            if(component == null)
-            {
-                throw new ArgumentNullException("Składnik/zbiornik jest nullem");
-            }
-
-            if(component.GetComponentType().GetName().Equals(Constans.LIQUID_TYPE))
-            {
-                Console.WriteLine(string.Format("Dodaje {0} mililitrow {1} ({3}) o temperaturze {2} do kubka.", capacity, component.GetName(), component.GetComponent().GetTemperature(), component.GetComponentType().GetName()));
-            }
-            else
-            {
-                Console.WriteLine(string.Format("Dodaje {0} gramow {1} ({2}) do kubka.", capacity, component.GetName(), component.GetComponentType().GetName()));
-            }
-            component.RemoveContent(capacity);
+            Name = name;
         }
 
-        public void RunJob()
+        public void AddToCup(ITank tank, int capacity)
         {
-            throw new NotImplementedException();
-        }
-
-        public void SetName(string name)
-        {
-            if (string.IsNullOrEmpty(name))
+            if(tank == null)
             {
-                throw new ArgumentNullException("Nazwa jest pusta lub nullem");
+                throw new ArgumentNullException("Zbiornik jest nullem");
             }
-            this.Name = name;
-        }
 
-        public string GetName()
-        {
-            return this.Name;
+            if(capacity > 0)
+            {
+                if (tank.Type.Equals(ComponentType.LIQUID))
+                {
+                    Console.WriteLine(string.Format("Dodaje {0} mililitrow {1} ({3}) o temperaturze {2} do kubka.", capacity, tank.Name, tank.Component.Temperature, tank.Type.ToString()));
+                }
+                else
+                {
+                    Console.WriteLine(string.Format("Dodaje {0} gramow {1} ({2}) do kubka.", capacity, tank.Name, tank.Type.ToString()));
+                }
+                tank.RemoveContent(capacity);
+            }
         }
     }
 }

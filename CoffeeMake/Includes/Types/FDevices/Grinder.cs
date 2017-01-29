@@ -9,52 +9,38 @@ namespace CoffeeMake.Includes.Types.FDevices
 {
     public class Grinder : IGrinder
     {
-        private string Name;
-        public Grinder()
+        private string _name;
+        public string Name
         {
-            this.Name = "Brak";
-        }
-        public Grinder(string name)
-        {
-            if (string.IsNullOrEmpty(name))
+            get { return _name; }
+            set
             {
-                throw new ArgumentNullException("Nazwa jest pusta lub nullem");
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("Nazwa jest pusta lub nullem");
+                }
+                _name = value;
             }
-            this.Name = name;
         }
 
-        public bool Grind(IComponent component)
+        public Grinder(string name)
         {
-            if (!component.GetGrindable())
+            Name = name;
+        }
+
+        public bool Grind(Component component)
+        {
+            if (!component.Grindable)
             {
                 throw new ArgumentException("Nie mozna zmielic skladnika ktory nie jest do mielenia");
             }
 
-            if (!component.GetComponentType().GetName().Equals(Constans.DRY_TYPE))
+            if (!component.Type.Equals(ComponentType.DRY))
             {
                 throw new ArgumentException("Probujemy zmielic zly rodzaj skladnika");
             }
-            Console.WriteLine(string.Format("Zmielilo {0}", component.GetName()));
+            Console.WriteLine(string.Format("Zmielilo {0}", component.Name));
             return true;
-        }
-
-        public void RunJob()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetName(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException("Nazwa jest pusta lub nullem");
-            }
-            this.Name = name;
-        }
-
-        public string GetName()
-        {
-            return this.Name;
         }
     }
 }

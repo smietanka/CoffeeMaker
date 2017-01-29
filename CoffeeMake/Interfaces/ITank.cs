@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoffeeMake.Includes.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,9 @@ namespace CoffeeMake.Interfaces
 {
     public interface ITank : IDevice
     {
-        float GetCapacity();
-        void SetCapacity(float capacity);
-
-        IComponentType GetComponentType();
-        void SetComponentType(IComponentType type);
-
-        IComponent GetComponent();
-        void SetComponent(IComponent component);
+        Component Component { get; set; }
+        float Capacity { get; set; }
+        ComponentType Type { get; set; }
 
         void RemoveContent(float content);
         void AddContent(float content);

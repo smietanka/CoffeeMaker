@@ -1,5 +1,4 @@
-﻿using CoffeeMake.Includes.Types.ComponentType;
-using CoffeeMake.Interfaces;
+﻿using CoffeeMake.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,53 +9,30 @@ namespace CoffeeMake.Includes.Types.FDevices
 {
     public class Pump : IPump
     {
-        private string Name;
-        private IComponentType ComponentType;
-        public Pump()
+        private string _name;
+        public string Name
         {
-            this.Name = "Brak";
-            this.ComponentType = new Dry();
-        }
-        public Pump(string name, IComponentType type)
-        {
-            if (string.IsNullOrEmpty(name) || type == null)
+            get { return _name; }
+            set
             {
-                throw new ArgumentNullException("Nazwa lub typ jest pusty lub null");
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("Nazwa jest pusta lub nullem.");
+                }
+                _name = value;
             }
-            this.Name = name;
-            this.ComponentType = type;
         }
-        public void SetComponentType(IComponentType type)
+        public ComponentType Type { get; set; }
+
+        public Pump(string name, ComponentType type)
         {
-            if (type == null)
-            {
-                throw new ArgumentNullException("Typ jest pusty lub null");
-            }
-            this.ComponentType = type;
+            Name = name;
+            Type = type;
         }
 
-        public IComponentType GetComponentType()
-        {
-            return this.ComponentType;
-        }
-
-        public void RunJob()
+        public void Pumping(Component component)
         {
             throw new NotImplementedException();
-        }
-
-        public void SetName(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException("Nazwa jest pusta lub nullem");
-            }
-            this.Name = name;
-        }
-
-        public string GetName()
-        {
-            return this.Name;
         }
     }
 }

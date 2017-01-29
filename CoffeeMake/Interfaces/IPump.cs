@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoffeeMake.Includes.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace CoffeeMake.Interfaces
 {
-    public interface IPump :IDevice
+    public interface IPump : IDevice
     {
-        void SetComponentType(IComponentType type);
-        IComponentType GetComponentType();
+        ComponentType Type { get; set; }
+
+        void Pumping(Component component);
     }
 }

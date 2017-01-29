@@ -10,6 +10,7 @@ namespace CoffeeMake.Includes.Types.FDevices
     public class Devices
     {
         private IList<IDevice> AllDevices { get; set; }
+
         public Devices()
         {
             AllDevices = new List<IDevice>();
@@ -21,7 +22,7 @@ namespace CoffeeMake.Includes.Types.FDevices
                 throw new ArgumentNullException("Podano null");
             }
             this.AllDevices.Add(device);
-            Console.WriteLine(string.Format("Dodalo {0}", device.GetName()));
+            Console.WriteLine(string.Format("Dodalo {0}", device.Name));
         }
         public void Remove(IDevice device)
         {
@@ -33,7 +34,7 @@ namespace CoffeeMake.Includes.Types.FDevices
             {
                 throw new ArgumentNullException("Nazwa urządzenia jest pusta lub null");
             }
-            IDevice device = this.AllDevices.Where(x => x.GetName().Equals(name)).FirstOrDefault();
+            IDevice device = this.AllDevices.Where(x => x.Name.Equals(name)).FirstOrDefault();
             if(device == null)
             {
                 throw new NullReferenceException("Nie znaleziono takiego urządzenia");

@@ -50,9 +50,6 @@
     <Compile Include="Includes\Types\Component.cs" />
     <Compile Include="Includes\Types\ComponentDefinition.cs" />
     <Compile Include="Includes\Types\Components.cs" />
-    <Compile Include="Includes\Types\ComponentType\Dry.cs" />
-    <Compile Include="Includes\Types\ComponentType\Liquid.cs" />
-    <Compile Include="Includes\Types\Constans.cs" />
     <Compile Include="Includes\Types\FDevices\Devices.cs" />
     <Compile Include="Includes\Types\FDevices\Grinder.cs" />
     <Compile Include="Includes\Types\FDevices\Head.cs" />
@@ -64,13 +61,12 @@
     <Compile Include="Includes\Types\Recipe.cs" />
     <Compile Include="Includes\Types\Tanks.cs" />
     <Compile Include="Includes\Types\Touch.cs" />
-    <Compile Include="Interfaces\IComponent.cs" />
     <Compile Include="Interfaces\IDevice.cs" />
     <Compile Include="Interfaces\IExpress.cs" />
     <Compile Include="Interfaces\IGrinder.cs" />
     <Compile Include="Interfaces\IHead.cs" />
     <Compile Include="Interfaces\IHeater.cs" />
-    <Compile Include="Interfaces\IComponentType.cs" />
+    <Compile Include="Interfaces\ComponentType.cs" />
     <Compile Include="Interfaces\IPump.cs" />
     <Compile Include="Interfaces\ITank.cs" />
     <Compile Include="Interfaces\ITouch.cs" />

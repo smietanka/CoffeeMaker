@@ -15,13 +15,13 @@ namespace CoffeeMake.Includes.Types
             this.AllTanks = new List<ITank>();
         }
 
-        public ITank Get(IComponentType type, string name)
+        public ITank Get(ComponentType type, string name)
         {
-            if (string.IsNullOrEmpty(name) || type == null)
+            if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentException("Zbiornik jest nullem lub nazwa jest pusta");
+                throw new ArgumentException("Nazwa jest pusta lub nullem.");
             }
-            ITank tank = this.AllTanks.Where(x => x.GetType().Equals(type) && x.GetName().Equals(name)).FirstOrDefault();
+            ITank tank = this.AllTanks.Where(x => x.GetType().Equals(type) && x.Name.Equals(name)).FirstOrDefault();
             if(tank == null)
             {
                 throw new NullReferenceException("Nie znaleziono takiego zbiornika");
@@ -34,7 +34,7 @@ namespace CoffeeMake.Includes.Types
             {
                 throw new ArgumentNullException("Nazwa zbiornika jest błędna");
             }
-            ITank tank = this.AllTanks.Where(x => x.GetName().Equals(name)).FirstOrDefault();
+            ITank tank = this.AllTanks.Where(x => x.Name.Equals(name)).FirstOrDefault();
             if(tank == null)
             {
                 throw new NullReferenceException("Nie znaleziono takiego zbiornika");
@@ -43,13 +43,13 @@ namespace CoffeeMake.Includes.Types
         }
         public void Add(ITank tank)
         {
-            if (tank == null && tank.GetComponentType() == null)
+            if (tank == null)
             {
-                throw new ArgumentNullException(tank.GetName() + "Zbiornik jest nullem");
+                throw new ArgumentNullException(tank.Name+ "Zbiornik jest nullem");
 
             }
             this.AllTanks.Add(tank);
-            Console.WriteLine(string.Format("Dodano {0} zbiornik o pojemnosci {1} typu {2}", tank.GetName(), tank.GetCapacity(), tank.GetComponentType().GetName()));
+            Console.WriteLine(string.Format("Dodano {0} zbiornik o pojemnosci {1} typu {2}", tank.Name, tank.Capacity, tank.Type.ToString()));
         }
     }
 }

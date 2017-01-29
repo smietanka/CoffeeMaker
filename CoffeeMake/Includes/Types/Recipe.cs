@@ -9,18 +9,19 @@ namespace CoffeeMake.Includes.Types
 {
     public class Recipe
     {
-        private IList<ComponentDefinition> ComponentsWithAmountAndTemp;
-        public Recipe()
+        private IList<ComponentDefinition> _recipeComponents = new List<ComponentDefinition>();
+
+        public IList<ComponentDefinition> RecipeComponents
         {
-            this.ComponentsWithAmountAndTemp = new List<ComponentDefinition>();
-        }
-        public Recipe(IList<ComponentDefinition> components)
-        {
-            if (!components.Any())
+            get { return _recipeComponents; }
+            set
             {
-                throw new ArgumentException("Brak skladnikow");
+                if (!value.Any())
+                {
+                    throw new ArgumentException("Nie podano żadnych składników.");
+                }
+                _recipeComponents = value;
             }
-            this.ComponentsWithAmountAndTemp = components;
         }
 
         public void AddComponentDefinition(ComponentDefinition def)
@@ -29,18 +30,15 @@ namespace CoffeeMake.Includes.Types
             {
                 throw new ArgumentNullException("Składnik receptury jest nullem.");
             }
-            this.ComponentsWithAmountAndTemp.Add(def);
+            this.RecipeComponents.Add(def);
         }
-        public IList<ComponentDefinition> GetComponents()
-        {
-            return this.ComponentsWithAmountAndTemp;
-        }
+
         public void ShowComponentsToConsole()
         {
-            foreach (var componentInRecipe in ComponentsWithAmountAndTemp)
+            foreach (var componentInRecipe in RecipeComponents)
             {
                 var sb = new StringBuilder();
-                sb.Append(string.Format("{0} [{1}, {2}]", componentInRecipe.GetComponent(), string.Format("Temperatura: {0}", componentInRecipe.GetTemperature()), "Ml/Gram: " + componentInRecipe.GetAmount()));
+                sb.Append(string.Format("{0} [{1}, {2}]", componentInRecipe.ComponentName, string.Format("Temperatura: {0}", componentInRecipe.Temperature), "Ml/Gram: " + componentInRecipe.Amount));
                 Console.WriteLine(string.Format("{0}", sb.ToString()));
             }
         }

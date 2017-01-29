@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace CoffeeMake.Interfaces
 {
-    public interface IComponentType
+    public enum ComponentType
     {
-        string GetName();
+        DRY, 
+        LIQUID
     }
 }

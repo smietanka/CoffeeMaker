@@ -9,28 +9,25 @@ namespace CoffeeMake.Includes.Types
 {
     public class Components
     {
-        private List<IComponent> AllComponents;
-         public Components()
-        {
-            this.AllComponents = new List<IComponent>();
-        }
-         public IComponent Get(string name)
+        private IList<Component> AllComponents = new List<Component>();
+
+         public Component Get(string name)
          {
-             var compon = this.AllComponents.Where(x => x.Name.GetName().Equals(name)).FirstOrDefault();
+             var compon = this.AllComponents.Where(x => x.Name.Equals(name)).FirstOrDefault();
              if (compon == null)
              {
                  throw new KeyNotFoundException("Nie znaleziono skladnika o nazwie: " + name);
              }
              return compon;
          }
-         public void Add(IComponent component)
+         public void Add(Component component)
          {
              if (component == null)
              {
                  throw new ArgumentNullException("skladnik jest pusty");
              }
              this.AllComponents.Add(component);
-             Console.WriteLine(string.Format("Dodalo {0} ({1}) do listy skladnikow.", component.GetName(), component.GetComponentType().GetName()));
+             Console.WriteLine(string.Format("Dodalo {0} ({1}) do listy skladnikow.", component.Name, component.Type.ToString()));
          }
     }
 }
