@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace CoffeeMake.Includes.Types
 {
-    // TODO: Usunac if gdzie sprawdzamy wszystkei zmiennee. (if cos I cos I cos then) ktorys z parametrow zal
     // TODO: cos z listami ogarnac? to trzeba kurde.
     // Przelozyc WriteLiny na GUIca
     // TODO: Sprobowac cos zrobic z component definition, tj. cos z ta temperatura. bo nie wszystkie skladniki potrzebuja zmienci temperature. Np mąka nie jest potrzebna do podgrzewania
@@ -16,70 +15,51 @@ namespace CoffeeMake.Includes.Types
     //TODO do zmiany jeszcze touch
     public class CoffeeMaker : IExpress
     {
-        private Devices Devices;
-        private Components Components;
-        private Tanks Tanks;
+        private Devices _devices = new Devices();
+        public Devices Devices
+        {
+            get { return _devices; }
+        }
 
-        private Touch _touchScreen;
+        private Touch _touchScreen = new Touch();
         public Touch Touch
         {
             get { return _touchScreen; }
-            set
-            {
-                if(value == null)
-                {
-                    throw new ArgumentNullException("Panel dotykowy jest nullsem");
-                }
-                _touchScreen = value;
-            }
         }
-
-        public CoffeeMaker()
-        {
-            Devices = new Devices();
-            Components = new Components();
-            Tanks = new Tanks();
-            Touch = new Touch(Constans.TOUCH_NAME);
-        }
+        private IList<ITank> Tanks = new List<ITank>();
 
         public void Do(Option option)
         {
-            IHead head = Devices.GetHead();
-
             option.Recipe.ShowComponentsToConsole();
 
             foreach (ComponentDefinition compDefinition in option.Recipe.RecipeComponents)
             {
-                ITank tankWithComponent = Tanks.Get(compDefinition.ComponentName);
-                
-                if(tankWithComponent.Component.Grindable)
+                ITank tankWithComponent = Tanks.Where(z => z.Component.Name.Equals(compDefinition.ComponentName)).FirstOrDefault();
+                if(tankWithComponent != null)
                 {
-                    IGrinder grinder = Devices.GetGrinder();
-                    grinder.Grind(tankWithComponent.Component);
-                }
+                    if (tankWithComponent.Component.Grindable)
+                    {
+                        Devices.Gridner.Grind(tankWithComponent.Component);
+                    }
 
-                if(tankWithComponent.Type.Equals(ComponentType.LIQUID))
-                {
-                    IHeater heater = Devices.GetHeater();
-                    var componentTemperature = compDefinition.Temperature;
-
-                    heater.Heat(tankWithComponent.Component, compDefinition.Temperature);
+                    if (tankWithComponent.Component.Type.Equals(ComponentType.LIQUID))
+                    {
+                        _devices.Heater.Heat(tankWithComponent.Component, compDefinition.Temperature);
+                    }
+                    Devices.Head.AddToCup(tankWithComponent, compDefinition.Amount);
                 }
-                head.AddToCup(tankWithComponent, compDefinition.Amount);
+            }
+            ITank sugarTank = Tanks.Where(z => z.Component.Name.Equals("cukier")).FirstOrDefault();
+            if(sugarTank != null)
+            {
+                Devices.Head.AddToCup(sugarTank, _touchScreen.Sugar);
             }
 
-            head.AddToCup(Tanks.Get(Constans.SUGAR), _touchScreen.GetSugar());
-            head.AddToCup(Tanks.Get(Constans.MILK), _touchScreen.GetMilk());
-        }
-
-        public void ShowOptions()
-        {
-            _touchScreen.ShowOptions();
-        }
-
-        public void AddDevice(IDevice device)
-        {
-            Devices.Add(device);
+            ITank milkTank = Tanks.Where(z => z.Component.Name.Equals("mleko")).FirstOrDefault();
+            if(milkTank != null)
+            {
+                Devices.Head.AddToCup(milkTank, _touchScreen.Milk);
+            }
         }
 
         public void AddTank(string name, ComponentType type, int capacity, bool grindable)
@@ -93,15 +73,7 @@ namespace CoffeeMake.Includes.Types
                 throw new ArgumentException("Zła wartość pojemności.");
             }
 
-            Component component = new Component(name, type, grindable);
-            Components.Add(component);
-            Tank tank = new Tank(name, capacity, type, component);
-            Tanks.Add(tank);
-        }
-
-        public ITank GetTank(string name)
-        {
-            return Tanks.Get(name);
+            Tanks.Add(new Tank(capacity, new Component(name, type, grindable)));
         }
     }
 }

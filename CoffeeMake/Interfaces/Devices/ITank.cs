@@ -11,7 +11,6 @@ namespace CoffeeMake.Interfaces
     {
         Component Component { get; set; }
         float Capacity { get; set; }
-        ComponentType Type { get; set; }
 
         void RemoveContent(float content);
         void AddContent(float content);

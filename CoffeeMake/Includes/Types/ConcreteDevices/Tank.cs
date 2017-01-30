@@ -9,20 +9,6 @@ namespace CoffeeMake.Includes.Types.FDevices
 {
     public class Tank : ITank
     {
-        private string _name;
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException("Nazwa jest pusta lub nullem.");
-                }
-                _name = value;
-            }
-        }
-
         private float _capacity;
         public float Capacity
         {
@@ -47,27 +33,13 @@ namespace CoffeeMake.Includes.Types.FDevices
                 {
                     throw new ArgumentNullException("Składnik jest nullem.");
                 }
-
-                if (!value.Type.Equals(Type))
-                {
-                    throw new ArgumentException("Składnik jest złym typem do zbiornika.");
-                }
-
-                if (!value.Name.Equals(_name))
-                {
-                    throw new ArgumentException("Zbiornik jest przeznaczony dla innego składnika. Należy sprawdzić nazwy zbiornika i składnika jaki chcemy tam wrzucic.");
-                }
                 _component = value;
             }
         }
 
-        public ComponentType Type { get; set; }
-
-        public Tank(string name, float capacity, ComponentType type, Component component)
+        public Tank(float capacity, Component component)
         {
-            Name = name;
             Capacity = capacity;
-            Type = type;
             Component = component;
         }
 
@@ -91,7 +63,7 @@ namespace CoffeeMake.Includes.Types.FDevices
 
         public void ShowCapacityToConsole()
         {
-            Console.WriteLine(string.Format("W ekspresie jest {0} ml {1}", Capacity, Name));
+            Console.WriteLine(string.Format("W ekspresie jest {0} ml {1}", Capacity, Component.Name));
         }
     }
 }

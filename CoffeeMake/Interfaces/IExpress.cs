@@ -9,12 +9,12 @@ namespace CoffeeMake.Interfaces
 {
     public interface IExpress
     {
-        void Do(Option option);
         Touch Touch { get; }
+        Devices Devices { get; }
 
-        void ShowOptions();
+        void Do(Option option);
+        
+
         void AddTank(string name, ComponentType type, int capacity, bool grindable);
-        ITank GetTank(string name);
-        void AddDevice(IDevice device);
     }
 }

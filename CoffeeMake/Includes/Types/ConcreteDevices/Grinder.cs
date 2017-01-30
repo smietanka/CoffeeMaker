@@ -9,25 +9,6 @@ namespace CoffeeMake.Includes.Types.FDevices
 {
     public class Grinder : IGrinder
     {
-        private string _name;
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException("Nazwa jest pusta lub nullem");
-                }
-                _name = value;
-            }
-        }
-
-        public Grinder(string name)
-        {
-            Name = name;
-        }
-
         public bool Grind(Component component)
         {
             if (!component.Grindable)

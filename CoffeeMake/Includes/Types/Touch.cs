@@ -7,170 +7,118 @@ using System.Threading.Tasks;
 
 namespace CoffeeMake.Includes.Types
 {
-    public class Touch : ITouch, IDevice
+    public class Touch : ITouch
     {
-        private IList<Option> Options = new List<Option>();
-        private string _name;
-        public string Name
+        private static int IndexedOption = 0;
+        private IDictionary<int, Option> Options = new Dictionary<int, Option>();
+
+        private int _sugar;
+        public int Sugar
         {
-            get { return _name; }
+            get
+            {
+                return _sugar;
+            }
             set
             {
-
-                if (string.IsNullOrEmpty(value))
+                if (value < 0 || value > 100)
                 {
-                    throw new ArgumentNullException("Nazwa jest pusta lub nullem");
+                    throw new ArgumentException("Ilosc cukru jest w złym przedziale. Podaj wartość od 0 do 100.");
                 }
-                _name = value;
+                _sugar = value;
+            }
+        }
+        private int _milk;
+        public int Milk
+        {
+            get
+            {
+                return _milk;
+            }
+            set
+            {
+                if (value < 0 || value > 100)
+                {
+                    throw new ArgumentException("Ilosc mleka jest w złym przedziale. Podaj wartość od 0 do 100.");
+                }
+                _milk = value;
             }
         }
 
-        private int Sugar = 0;
-        private int Milk = 0;
-
-        private Option CurrentOption;
-
-        public Touch(string name)
+        private Option _currentOption;
+        public Option CurrentOption
         {
-            Name = name;
+            get
+            {
+                if (_currentOption == null)
+                {
+                    throw new NullReferenceException("Nie wybrano żadnej opcji, dlatego aktualna opcja jest pusta.");
+                }
+                return _currentOption;
+            }
+            set
+            {
+                if(value == null)
+                {
+                    throw new ArgumentNullException("Opcja jest nullem.");
+                }
+                _currentOption = value;
+            }
         }
 
         public void AddOption(Option option)
         {
-            if (option.Equals(null))
+            if (option == null)
             {
                 throw new ArgumentNullException("opcja jest nullem");
             }
-            this.Options.Add(option);
-            Console.WriteLine(string.Format("Dodalo opcje {0}", option.Name));
+            Options.Add(IndexedOption, option);
+            IndexedOption++;
         }
 
-        public Option GetOption(string name)
-        {
-            Option result = this.Options.Where(x => x.Name.Equals(name)).FirstOrDefault();
-            if (result == null)
-            {
-                throw new KeyNotFoundException("Nie znalazlo opcji o danej nazwie.");
-            }
-            return result;
-        }
-
-        public Option GetCurrentOption()
-        {
-            if(CurrentOption == null)
-            {
-                throw new NullReferenceException("Nie wybrano żadnej opcji, dlatego aktualna opcja jest pusta.");
-            }
-            return this.CurrentOption;
-        }
-        public int GetSugar()
-        {
-            return this.Sugar;
-        }
-        public int GetMilk()
-        {
-            return this.Milk;
-        }
-
-        public bool SetSugar(int sugar)
-        {
-            bool result = true;
-            if (sugar < 0 || sugar > 100)
-            {
-                result = false;
-            }
-            this.Sugar = sugar;
-            return result;
-        }
-        public bool SetMilk(int milk)
-        {
-            bool result = true;
-            if (milk < 0 || milk > 100)
-            {
-                result = false;
-            }
-            this.Milk = milk;
-            return result;
-        }
-        private int CheckInLine(string ioType)
-        {
-            int result = 0;
-            if (!int.TryParse(ioType, out result))
-            {
-                //Zostawia 0
-            }
-            return result;
-        }
         public void ShowOptions()
         {
-            int index = 0;
-            var indexedOptions = new Dictionary<int, Option>();
-            try
+            if (!this.Options.Any()) throw new IndexOutOfRangeException("Brak opcji do wyswietlenia");
+            else
             {
-                if (!this.Options.Any()) throw new IndexOutOfRangeException("Brak opcji do wyswietlenia");
-                else
+                foreach(var option in Options)
                 {
-                    foreach (var eachOption in this.Options)
-                    {
-                        Console.WriteLine(string.Format("{0}. {1}.", index, eachOption.Name));
-                        indexedOptions.Add(index, eachOption);
-                        index++;
-                    }
-
-                    Console.WriteLine("Ktora opcje napoju wybierasz: ");
-                    Option optionOut;
-                    bool isGoodOption = false;
-                    int optionIn;
-                    var optionReadLine = Console.ReadLine();
-                    if (!string.IsNullOrEmpty(optionReadLine) && int.TryParse(optionReadLine, out optionIn))
-                    {
-                        if (indexedOptions.TryGetValue(optionIn, out optionOut))
-                        {
-                            this.CurrentOption = optionOut;
-                            isGoodOption = true;
-                        }
-                    }
-                    if (!isGoodOption)
-                    {
-                        while (true)
-                        {
-                            Console.WriteLine("Zle wpisana opcja");
-                            Console.WriteLine("Wprowadz jeszcze raz: ");
-                            optionReadLine = Console.ReadLine();
-                            if (!string.IsNullOrEmpty(optionReadLine) && int.TryParse(optionReadLine, out optionIn))
-                            {
-                                if (indexedOptions.TryGetValue(optionIn, out optionOut))
-                                {
-                                    this.CurrentOption = optionOut;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    Console.WriteLine("Wybrales/as poprawnie napoj");
-
-                    Console.WriteLine("Ile cukru [0-100]: ");
-                    int sugarIn = CheckInLine(Console.ReadLine());
-                    while (!SetSugar(sugarIn))
-                    {
-                        Console.WriteLine("Zle wpisany cukier");
-                        Console.WriteLine("Wprowadz jeszcze raz: ");
-                        sugarIn = CheckInLine(Console.ReadLine());
-                    }
-
-                    Console.WriteLine("Ile mleka [0-100]: ");
-                    int milkIn = CheckInLine(Console.ReadLine());
-                    while (!SetMilk(milkIn))
-                    {
-                        Console.WriteLine("Zle wpisane mleko");
-                        Console.WriteLine("Wprowadz jeszcze raz: ");
-                        milkIn = CheckInLine(Console.ReadLine());
-                    }
+                    Console.WriteLine(string.Format("{0}. {1}", option.Key, option.Value.Name));
                 }
-            }
-            catch (IndexOutOfRangeException e)
-            {
-                throw new IndexOutOfRangeException(e.Message);
+
+                int optionIn = Convert.ToInt32(Console.ReadLine());
+                Option outOption;
+                while(!Options.TryGetValue(optionIn, out outOption))
+                {
+                    Console.WriteLine("Zle wpisana opcja");
+                    Console.WriteLine("Wprowadz jeszcze raz: ");
+                    optionIn = Convert.ToInt32(Console.ReadLine());
+                }
+                CurrentOption = outOption;
+               
+                Console.WriteLine("Wybrales/as poprawnie napoj");
+
+                Console.WriteLine("Czy chcesz cukier?");
+                Console.WriteLine("0. Nie");
+                Console.WriteLine("1. Tak");
+                int sugarBoolIn = Convert.ToInt32(Console.ReadLine());
+                if (sugarBoolIn.Equals(1))
+                {
+                    Console.WriteLine("Ile cukru [0-100]: ");
+                    int sugarIn = Convert.ToInt32(Console.ReadLine());
+                    Sugar = sugarIn;
+                }
+
+                Console.WriteLine("Czy chcesz mleko?");
+                Console.WriteLine("0. Nie");
+                Console.WriteLine("1. Tak");
+                int milkBoolIn = Convert.ToInt32(Console.ReadLine());
+                if (milkBoolIn.Equals(1))
+                {
+                    Console.WriteLine("Ile mleka [0-100]: ");
+                    int milkIn = Convert.ToInt32(Console.ReadLine());
+                    Milk = milkIn;
+                }
             }
         }
     }

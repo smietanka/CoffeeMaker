@@ -9,25 +9,6 @@ namespace CoffeeMake.Includes.Types.FDevices
 {
     public class Heater : IHeater
     {
-        private string _name;
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException("Nazwa jest pusta lub nullem");
-                }
-                _name = value;
-            }
-        }
-
-        public Heater(string name)
-        {
-            Name = name;
-        }
-
         public bool Heat(Component component, float temperature)
         {
             if(component == null)

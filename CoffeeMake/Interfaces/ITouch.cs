@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoffeeMake.Includes.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,10 @@ namespace CoffeeMake.Interfaces
 {
     public interface ITouch
     {
+        int Sugar { get; set; }
+        int Milk { get; set; }
+        Option CurrentOption { get; set; }
+
         void ShowOptions();
     }
 }
