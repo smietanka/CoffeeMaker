@@ -1,0 +1,8 @@
+*.dll
+*.exe
+obj/
+debug/
+bin/
+Temp/
+builds/
+library/

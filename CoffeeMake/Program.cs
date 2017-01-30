@@ -36,7 +36,7 @@ namespace CoffeeMake
 
             coffeeMaker.Devices.Head = new Head();
             coffeeMaker.Devices.Heater = new Heater();
-            coffeeMaker.Devices.Gridner = new Grinder();
+            //coffeeMaker.Devices.Gridner = new Grinder();
 
             var firstOption = new Option("Kawa czarna");
             Recipe firstOptionRecipe = new Recipe();
