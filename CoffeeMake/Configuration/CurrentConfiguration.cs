@@ -12,6 +12,7 @@ namespace CoffeeMake.Configuration
 
         private CurrentConfiguration() { }
 
+        //TODO: Możliwość wyboru innych czytania konfiguracji z innych miejsc - np. z pliku
         public static IConfiguration Instance
         {
             get
