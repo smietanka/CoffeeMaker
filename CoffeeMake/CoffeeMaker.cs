@@ -10,13 +10,8 @@ using System.Threading.Tasks;
 
 namespace CoffeeMake
 {
-    // TODO: Sprobowac cos zrobic z component definition, tj. cos z ta temperatura. bo nie wszystkie skladniki potrzebuja zmienci temperature.
-    // Np mąka nie jest potrzebna do podgrzewania
-    // czy cos.. wiec nie ma sensu zeby trzymala takie pole.
-
-    // WOJTKOWE SUGESTIE
-    // dodac wzorzec dekorator z napojem. Klasa napoj. 
-    // sprobowac wzorzec: state, fabryka.
+    //TODO: Rozdzielic ComponentDefinition na dwie osobne klasy. z temperatura i bez.
+    //TODO: Wzorzec fabryka w momencie tworzenia zbiornika.
     public class CoffeeMaker
     {
         private Devices _devices;
@@ -53,7 +48,6 @@ namespace CoffeeMake
             {
                 throw new ArgumentNullException("Przepis jest nullem.");
             }
-
             foreach (ComponentDefinition compDefinition in recipe.RecipeComponents)
             {
                 Component component = _tanks.Where(z => z.Component.Name.Equals(compDefinition.ComponentName)).FirstOrDefault().Component;
@@ -69,16 +63,13 @@ namespace CoffeeMake
                     {
                         _devices.Heater.Heat(component, compDefinition.Temperature);
                     }
-                    //pompujemy gotowy skladnik w konkretnej ilosci do glowicy
-                    _devices.Pump.Pumping(component, compDefinition.Amount);
+                    _devices.Pump.Pumping(component);
                 }
             }
-
-            //glowica majac przepompowane skladniki "wypluwa" je tworzac napoj
             IDrink currentDrink = new Drink();
             foreach(var item in _devices.Head)
             {
-                currentDrink = new WithComponent(currentDrink, item.Key);
+                currentDrink = new WithComponent(currentDrink, item);
             }
             return currentDrink;
 

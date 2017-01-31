@@ -9,26 +9,22 @@ namespace CoffeeMake.Includes.Types
 {
     public class Head : IHead
     {
-        private Dictionary<Component, int> _compInHead;
+        private List<Component> _compInHead;
         public Head()
         {
-            _compInHead = new Dictionary<Component, int>();
+            _compInHead = new List<Component>();
         }
 
-        public void Add(Component component, int amount)
+        public void Add(Component component)
         {
             if(component == null)
             {
                 throw new ArgumentNullException("Skladnik jest nullem.");
             }
-            if(amount < 0)
-            {
-                throw new ArgumentException("Ilosc skladnika jest za mala.");
-            }
-            _compInHead.Add(component, amount);
+            _compInHead.Add(component);
         }
 
-        public IEnumerator<KeyValuePair<Component, int>> GetEnumerator()
+        public IEnumerator<Component> GetEnumerator()
         {
             return _compInHead.GetEnumerator();
         }

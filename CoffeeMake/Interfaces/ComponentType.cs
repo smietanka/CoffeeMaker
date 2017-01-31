@@ -8,7 +8,8 @@ namespace CoffeeMake.Interfaces
 {
     public enum ComponentType
     {
-        DRY, 
-        LIQUID
+        DRY = 0, 
+        LIQUID = 1,
+        OTHER = 999
     }
 }

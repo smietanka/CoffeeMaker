@@ -15,9 +15,9 @@ namespace CoffeeMake.Includes.Types
             this.head = head;
         }
 
-        public void Pumping(Component component, int amount)
+        public void Pumping(Component component)
         {
-            this.head.Add(component, amount);
+            this.head.Add(component);
         }
     }
 }

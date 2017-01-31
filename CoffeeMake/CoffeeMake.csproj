@@ -58,14 +58,14 @@
     <Compile Include="Includes\Types\Head.cs" />
     <Compile Include="Includes\Types\Heater.cs" />
     <Compile Include="Includes\Types\Pump.cs" />
-    <Compile Include="Includes\Types\Tank.cs" />
+    <Compile Include="Includes\Types\Tank\Tank.cs" />
     <Compile Include="CoffeeMaker.cs" />
     <Compile Include="Includes\Types\Devices.cs" />
     <Compile Include="Includes\Types\Drink\Drink.cs" />
-    <Compile Include="Includes\Types\Recipes.cs" />
+    <Compile Include="Includes\Types\Recipe\Recipes.cs" />
     <Compile Include="Includes\Types\Recipe\Recipe.cs" />
     <Compile Include="Includes\Types\Recipe\RecipeComponents.cs" />
-    <Compile Include="Includes\Types\Tanks.cs" />
+    <Compile Include="Includes\Types\Tank\Tanks.cs" />
     <Compile Include="Includes\Types\Drink\WithComponent.cs" />
     <Compile Include="Interfaces\IGrinder.cs" />
     <Compile Include="Interfaces\IHead.cs" />

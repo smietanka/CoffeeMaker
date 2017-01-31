@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace CoffeeMake.Interfaces
 {
-    public interface IHead : IEnumerable<KeyValuePair<Component, int>>
+    public interface IHead : IEnumerable<Component>
     {
-        void Add(Component component, int amount);
+        void Add(Component component);
     }
 }

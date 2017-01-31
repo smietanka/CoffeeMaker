@@ -9,6 +9,6 @@ namespace CoffeeMake.Interfaces
 {
     public interface IPump
     {
-        void Pumping(Component component, int amount);
+        void Pumping(Component component);
     }
 }
