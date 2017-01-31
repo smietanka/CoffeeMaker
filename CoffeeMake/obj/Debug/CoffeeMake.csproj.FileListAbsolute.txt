@@ -1,7 +1,4 @@
-D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMake\bin\Debug\CoffeeMake.exe.config
-D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMake\bin\Debug\CoffeeMake.exe
 D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMake\bin\Debug\CoffeeMake.pdb
-D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMake\obj\Debug\CoffeeMake.exe
 D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMake\obj\Debug\CoffeeMake.pdb
 D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMake\obj\Debug\CoffeeMake.csprojResolveAssemblyReference.cache
 D:\do posegregowania\Studia\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMake\bin\Debug\CoffeeMake.exe.config
@@ -10,3 +7,6 @@ D:\do posegregowania\Studia\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\C
 D:\do posegregowania\Studia\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMake\bin\Debug\CoffeeMake.exe
 D:\do posegregowania\Studia\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMake\bin\Debug\CoffeeMake.pdb
 D:\do posegregowania\Studia\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMake\obj\Debug\CoffeeMake.csprojResolveAssemblyReference.cache
+D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMake\bin\Debug\CoffeeMake.dll.config
+D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMake\bin\Debug\CoffeeMake.dll
+D:\STUDIA\Semestr 5\Modelowanie programow\Projekt\CoffeeMake\CoffeeMake\obj\Debug\CoffeeMake.dll

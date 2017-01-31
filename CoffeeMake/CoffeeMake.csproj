@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{34949C28-CB0A-497A-A793-A1850C5433B3}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CoffeeMake</RootNamespace>
     <AssemblyName>CoffeeMake</AssemblyName>
@@ -47,28 +47,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Includes\Types\Component.cs" />
-    <Compile Include="Includes\Types\ComponentDefinition.cs" />
-    <Compile Include="Includes\Types\ConcreteDevices\Grinder.cs" />
-    <Compile Include="Includes\Types\ConcreteDevices\Head.cs" />
-    <Compile Include="Includes\Types\ConcreteDevices\Heater.cs" />
-    <Compile Include="Includes\Types\ConcreteDevices\Pump.cs" />
-    <Compile Include="Includes\Types\ConcreteDevices\Tank.cs" />
-    <Compile Include="Includes\Types\CoffeeMaker.cs" />
+    <Compile Include="Configuration\CurrentConfiguration.cs" />
+    <Compile Include="Configuration\DbConfiguration.cs" />
+    <Compile Include="Configuration\IConfiguration.cs" />
+    <Compile Include="Includes\Types\Component\Component.cs" />
+    <Compile Include="Includes\Types\Component\ComponentDefinition.cs" />
+    <Compile Include="Includes\Types\Component\Components.cs" />
+    <Compile Include="Includes\Types\Drink\DrinkDecorator.cs" />
+    <Compile Include="Includes\Types\Grinder.cs" />
+    <Compile Include="Includes\Types\Head.cs" />
+    <Compile Include="Includes\Types\Heater.cs" />
+    <Compile Include="Includes\Types\Pump.cs" />
+    <Compile Include="Includes\Types\Tank.cs" />
+    <Compile Include="CoffeeMaker.cs" />
     <Compile Include="Includes\Types\Devices.cs" />
-    <Compile Include="Includes\Types\Option.cs" />
-    <Compile Include="Includes\Types\Recipe.cs" />
-    <Compile Include="Includes\Types\Touch.cs" />
-    <Compile Include="Interfaces\Devices\IDevice.cs" />
-    <Compile Include="Interfaces\IExpress.cs" />
-    <Compile Include="Interfaces\Devices\IGrinder.cs" />
-    <Compile Include="Interfaces\Devices\IHead.cs" />
-    <Compile Include="Interfaces\Devices\IHeater.cs" />
+    <Compile Include="Includes\Types\Drink\Drink.cs" />
+    <Compile Include="Includes\Types\Recipes.cs" />
+    <Compile Include="Includes\Types\Recipe\Recipe.cs" />
+    <Compile Include="Includes\Types\Recipe\RecipeComponents.cs" />
+    <Compile Include="Includes\Types\Tanks.cs" />
+    <Compile Include="Includes\Types\Drink\WithComponent.cs" />
+    <Compile Include="Interfaces\IGrinder.cs" />
+    <Compile Include="Interfaces\IHead.cs" />
+    <Compile Include="Interfaces\IHeater.cs" />
     <Compile Include="Interfaces\ComponentType.cs" />
-    <Compile Include="Interfaces\Devices\IPump.cs" />
-    <Compile Include="Interfaces\Devices\ITank.cs" />
-    <Compile Include="Interfaces\ITouch.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Interfaces\IPump.cs" />
+    <Compile Include="Interfaces\ITank.cs" />
+    <Compile Include="Interfaces\Drink\IDrink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
