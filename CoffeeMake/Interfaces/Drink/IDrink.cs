@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoffeeMake.Interfaces.Drink
+namespace CoffeeMake.Interfaces
 {
     public interface IDrink
     {

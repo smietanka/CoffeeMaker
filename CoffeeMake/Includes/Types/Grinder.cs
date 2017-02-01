@@ -11,6 +11,11 @@ namespace CoffeeMake.Includes.Types
     {
         public void Grind(Component component)
         {
+            if(component == null)
+            {
+                throw new ArgumentNullException("Skladnik jest nullem.");
+            }
+
             if (!component.Grindable)
             {
                 throw new ArgumentException("Nie mozna zmielic skladnika ktory nie jest do mielenia");

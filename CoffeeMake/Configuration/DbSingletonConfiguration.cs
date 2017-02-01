@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace CoffeeMake.Configuration
 {
-    public class DbConfiguration : IConfiguration
+    public class DbSingletonConfiguration : IConfiguration
     {
         public Recipes Recipes { get; private set; }
         public Components Components { get; private set; }
 
         private static readonly object _locker = new object();
-        private static DbConfiguration _instance;
+        private static DbSingletonConfiguration _instance;
 
-        public static DbConfiguration Instance
+        public static DbSingletonConfiguration Instance
         {
             get
             {
@@ -23,14 +23,14 @@ namespace CoffeeMake.Configuration
                 {
                     lock (_locker)
                     {
-                        _instance = new DbConfiguration();
+                        _instance = new DbSingletonConfiguration();
                     }
                 }
                 return _instance;
             }
         }
 
-        private DbConfiguration()
+        private DbSingletonConfiguration()
         {
             this.Recipes = new Recipes();
             this.Components = new Components();
@@ -45,7 +45,6 @@ namespace CoffeeMake.Configuration
             //TODO: pobieranie z bazy danych listy przepisow
 
             //TODO: pobieranie z bazy danych listy skladnikow
-            throw new NotImplementedException();
         }
     }
 }

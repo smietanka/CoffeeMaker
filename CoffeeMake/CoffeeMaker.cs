@@ -2,17 +2,12 @@
 using CoffeeMake.Includes.Types;
 using CoffeeMake.Includes.Types.Tank;
 using CoffeeMake.Interfaces;
-using CoffeeMake.Interfaces.Drink;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoffeeMake
 {
     //TODO: Rozdzielic ComponentDefinition na dwie osobne klasy. z temperatura i bez.
-    //TODO: Wzorzec fabryka w momencie tworzenia zbiornika.
     public class CoffeeMaker
     {
         private Devices _devices;
@@ -36,7 +31,7 @@ namespace CoffeeMake
         private void InitializeTanks()
         {
             _tanks = new Tanks();
-            foreach (var component in DbConfiguration.Instance.Components)
+            foreach (var component in DbSingletonConfiguration.Instance.Components)
             {
                 _tanks.Add(TankFactory.CreateTank(component));
             }

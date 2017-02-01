@@ -17,7 +17,7 @@ namespace CoffeeMake.Includes.Types
         public Recipes(List<Recipe> paramRecipes)
         {
             if(paramRecipes == null) 
-                throw new ArgumentNullException("Lista receptuj jest nullem.");
+                throw new ArgumentNullException("Lista receptury jest nullem.");
             _recipes = paramRecipes;
         }
         public IEnumerator<Recipe> GetEnumerator()

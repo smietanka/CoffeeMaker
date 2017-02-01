@@ -5,17 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoffeeMake.Includes.Types
+namespace CoffeeMake.Includes.Types.Tank
 {
-    public class LiquidTank : ITank
+    public class LiquidTank : Tank
     {
-        public float Capacity { get; private set; }
-
-        private Component _component;
-        public Component Component
+        public LiquidTank(Component component)
+            : base(component)
         {
-            get { return _component; }
-            private set
+
+        }
+        public override Component Component
+        {
+            get
+            {
+                return base.Component;
+            }
+            set
             {
                 if (value == null)
                 {
@@ -25,27 +30,8 @@ namespace CoffeeMake.Includes.Types
                 {
                     throw new ArgumentException("Skladnik nie jest przeznaczony do tego zbiornika");
                 }
-                _component = value;
+                base.Component = value;
             }
-        }
-
-        public LiquidTank(Component component)
-        {
-            Component = component;
-            Capacity = 1000;
-        }
-
-        public void RemoveContent(float content)
-        {
-            if (Capacity - content < 0)
-            {
-                throw new ArgumentException("Za duzo chcesz pobrac zawartosci.");
-            }
-            if (content < 0)
-            {
-                throw new ArgumentException("Wpisana ilość jest za mała.");
-            }
-            Capacity -= content;
         }
     }
 }

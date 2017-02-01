@@ -7,14 +7,8 @@ using NUnit.Framework;
 namespace CoffeeMakeTest
 {
     [TestFixture]
-    public class DrinkTest
+    public class DrinkWithComponentTest
     {
-        [Test]
-        public void Should_CreateNewObject_WithoutParameter()
-        {
-            Assert.DoesNotThrow(() => new Drink());
-        }
-
         [Test]
         public void Should_ThrowArgumentNullException_WithNullComponents()
         {

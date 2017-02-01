@@ -47,8 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\DbConfiguration.cs" />
-    <Compile Include="Configuration\IConfiguration.cs" />
+    <Compile Include="Configuration\DbSingletonConfiguration.cs" />
+    <Compile Include="Includes\Types\Tank\Tank.cs" />
+    <Compile Include="Interfaces\IConfiguration.cs" />
     <Compile Include="Includes\Types\Component\Component.cs" />
     <Compile Include="Includes\Types\Component\ComponentDefinition.cs" />
     <Compile Include="Includes\Types\Component\Components.cs" />

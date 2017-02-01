@@ -7,45 +7,31 @@ using System.Threading.Tasks;
 
 namespace CoffeeMake.Includes.Types.Tank
 {
-    public class DryTank : ITank
+    public class DryTank : Tank
     {
-        public float Capacity { get; private set; }
-
-        private Component _component;
-        public Component Component
+        public DryTank(Component component)
+            : base(component)
         {
-            get { return _component; }
-            private set
+
+        }
+        public override Component Component
+        {
+            get
+            {
+                return base.Component;
+            }
+            set
             {
                 if (value == null)
                 {
                     throw new ArgumentNullException("Składnik jest nullem.");
                 }
-                if(!value.Type.Equals(ComponentType.DRY))
+                if (!value.Type.Equals(ComponentType.DRY))
                 {
                     throw new ArgumentException("Skladnik nie jest przeznaczony do tego zbiornika");
                 }
-                _component = value;
+                base.Component = value;
             }
-        }
-
-        public DryTank(Component component)
-        {
-            Component = component;
-            Capacity = 1000;
-        }
-
-        public void RemoveContent(float content)
-        {
-            if (Capacity - content < 0)
-            {
-                throw new ArgumentException("Za duzo chcesz pobrac zawartosci.");
-            }
-            if (content < 0)
-            {
-                throw new ArgumentException("Wpisana ilość jest za mała.");
-            }
-            Capacity -= content;
         }
     }
 }

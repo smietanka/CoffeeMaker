@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoffeeMake.Includes.Types
+namespace CoffeeMake.Includes.Types.Tank
 {
-    class Tanks : IEnumerable<ITank>
+    public class Tanks : IEnumerable<ITank>
     {
         private List<ITank> _tanks;
 

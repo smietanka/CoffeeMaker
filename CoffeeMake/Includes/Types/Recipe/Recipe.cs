@@ -29,6 +29,10 @@ namespace CoffeeMake.Includes.Types
             get { return _recipeComponents; }
             set
             {
+                if(value == null)
+                {
+                    throw new ArgumentNullException("Skladniki sa nullem");
+                }
                 if (!value.Any())
                 {
                     throw new ArgumentException("Nie podano żadnych składników.");
@@ -38,18 +42,8 @@ namespace CoffeeMake.Includes.Types
         }
         public Recipe(string name, RecipeComponents components)
         {
-            if(string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException("nazwa pusta lub null");
-            }
-            if(components == null)
-            {
-                throw new ArgumentNullException("Skladniki przepisu jest null");
-            }
-            if(!components.Any())
-            {
-                throw new KeyNotFoundException("Psuta lista skladnikow");
-            }
+            Name = name;
+            RecipeComponents = components;
         }
     }
 }

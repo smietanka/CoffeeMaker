@@ -10,10 +10,12 @@ namespace CoffeeMake.Includes.Types
     public class RecipeComponents : IEnumerable<ComponentDefinition>
     {
         List<ComponentDefinition> _compDefinitions;
+
         public RecipeComponents()
         {
             _compDefinitions = new List<ComponentDefinition>();
         }
+
         public RecipeComponents(List<ComponentDefinition> paramDef)
         {
             if (paramDef == null)

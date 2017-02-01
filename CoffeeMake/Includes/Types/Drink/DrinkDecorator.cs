@@ -1,4 +1,4 @@
-﻿using CoffeeMake.Interfaces.Drink;
+﻿using CoffeeMake.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,10 @@ namespace CoffeeMake.Includes.Types
         protected readonly IDrink _drink;
         public DrinkDecorator(IDrink drink)
         {
+            if(drink == null)
+            {
+                throw new ArgumentNullException("napoj jest nullem");
+            }
             this._drink = drink;
         }
 

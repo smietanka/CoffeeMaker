@@ -9,8 +9,8 @@ namespace CoffeeMake.Interfaces
 {
     public interface ITank
     {
-        Component Component { get; }
-        float Capacity { get; }
+        Component Component { get; set; }
+        float Capacity { get; set; }
 
         void RemoveContent(float content);
     }

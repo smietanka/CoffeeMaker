@@ -22,7 +22,7 @@ namespace CoffeeMake.Includes.Types.Tank
                 case ComponentType.LIQUID:
                     return new LiquidTank(paramComp);
                 default:
-                    throw new ArgumentException("Nie znaleziono zbiornika dla takiego typu skladnika.");
+                    throw new NotImplementedException("Nie znaleziono zbiornika dla takiego typu skladnika.");
             }
         }
     }

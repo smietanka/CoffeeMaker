@@ -23,9 +23,9 @@ namespace CoffeeMake.Includes.Types
             }
         }
 
-        public ComponentType Type { get; set; }
+        public ComponentType Type { get; private set; }
 
-        public bool Grindable { get; set; }
+        public bool Grindable { get; private set; }
 
         private float _temperature;
         public float Temperature

@@ -18,10 +18,10 @@ namespace CoffeeMake.Includes.Types
 
             if (temperature < 0)
             {
-                throw new ArgumentNullException("Temperatura jest za niska.");
+                throw new ArgumentException("Temperatura jest za niska.");
             }
 
-            if(component.Equals(ComponentType.DRY))
+            if(component.Type.Equals(ComponentType.DRY))
             {
                 throw new ArgumentException("Suchy skladnik nie moze byc podgrzewany.");
             }
