@@ -10,6 +10,10 @@ namespace CoffeeMake.Includes.Types
     public abstract class DrinkDecorator : IDrink
     {
         protected readonly IDrink _drink;
+        /// <summary>
+        /// Bazowy konstruktor.
+        /// </summary>
+        /// <param name="drink">Napoj ktory bedzie dekorowany</param>
         public DrinkDecorator(IDrink drink)
         {
             if(drink == null)

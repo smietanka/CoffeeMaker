@@ -9,6 +9,11 @@ namespace CoffeeMake.Includes.Types
 {
     public class WithComponent : DrinkDecorator
     {
+        /// <summary>
+        /// Dekoruje bazowy napoj konkretnym skladnikiem
+        /// </summary>
+        /// <param name="drink">Napoj dekorowany</param>
+        /// <param name="comp">Skladnik jakim dekorujemy napoj.</param>
         public WithComponent(IDrink drink, Component comp)
             : base(drink)
         {

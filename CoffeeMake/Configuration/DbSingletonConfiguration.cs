@@ -14,7 +14,9 @@ namespace CoffeeMake.Configuration
 
         private static readonly object _locker = new object();
         private static DbSingletonConfiguration _instance;
-
+        /// <summary>
+        /// Zwraca instancje konfiguracji pobieranej z bazy danych.
+        /// </summary>
         public static DbSingletonConfiguration Instance
         {
             get
@@ -29,7 +31,9 @@ namespace CoffeeMake.Configuration
                 return _instance;
             }
         }
-
+        /// <summary>
+        /// Tworzy podstawowe kolekcje oraz ładuje pierwszy raz listę składników.
+        /// </summary>
         private DbSingletonConfiguration()
         {
             this.Recipes = new Recipes();

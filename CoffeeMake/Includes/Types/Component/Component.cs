@@ -40,7 +40,12 @@ namespace CoffeeMake.Includes.Types
                 _temperature = value;
             }
         }
-
+        /// <summary>
+        /// Tworzy obiekt skladnika z domyslna zerowa temperatura.
+        /// </summary>
+        /// <param name="name">Nazwa składnika</param>
+        /// <param name="type">Typ składnika</param>
+        /// <param name="grindable">Czy jest składnik mielony.</param>
         public Component(string name, ComponentType type, bool grindable)
         {
             Name = name;

@@ -51,17 +51,22 @@ namespace CoffeeMake.Includes.Types
             }
         }
         /// <summary>
-        /// 
+        /// Tworzy obiekt definicji skladnika (dla przepisu)
         /// </summary>
-        /// <param name="componentName">Składnik</param>
-        /// <param name="temperature">Temperatura. Musi być większa od 0</param>
-        /// <param name="amount">Ilość. Musi być większa od 0</param>
+        /// <param name="componentName">Nazwa skladnika</param>
+        /// <param name="temperature">Temperatura skladnika na jaka podgrzac.</param>
+        /// <param name="amount">Ilosc danego skladnika potrzebna do wytworzenia napoju</param>
         public ComponentDefinition(string componentName, int temperature, int amount)
         {
             ComponentName = componentName;
             Temperature = temperature;
             Amount = amount;
         }
+        /// <summary>
+        /// Tworzy obiekt definicji skladnika (dla przepisu)
+        /// </summary>
+        /// <param name="componentName">Nazwa skladnika</param>
+        /// <param name="amount">Ilosc danego skladnika potrzebna do wytworzenia napoju</param>
         public ComponentDefinition(string componentName, int amount)
         {
             ComponentName = componentName;
