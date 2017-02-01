@@ -11,7 +11,5 @@ namespace CoffeeMake.Configuration
     {
         Recipes Recipes { get; }
         Components Components { get; }
-
-        void Load();
     }
 }

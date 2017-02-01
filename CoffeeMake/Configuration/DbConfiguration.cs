@@ -10,23 +10,42 @@ namespace CoffeeMake.Configuration
     public class DbConfiguration : IConfiguration
     {
         public Recipes Recipes { get; private set; }
-
         public Components Components { get; private set; }
 
-        public DbConfiguration()
+        private static readonly object _locker = new object();
+        private static DbConfiguration _instance;
+
+        public static DbConfiguration Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (_locker)
+                    {
+                        _instance = new DbConfiguration();
+                    }
+                }
+                return _instance;
+            }
+        }
+
+        private DbConfiguration()
         {
             this.Recipes = new Recipes();
             this.Components = new Components();
+            Load();
         }
 
         /// <summary>
         /// Inicjalizuje listę składników i przepisów z bazy danych.
         /// </summary>
-        public void Load()
+        private void Load()
         {
             //TODO: pobieranie z bazy danych listy przepisow
 
             //TODO: pobieranie z bazy danych listy skladnikow
+            throw new NotImplementedException();
         }
     }
 }

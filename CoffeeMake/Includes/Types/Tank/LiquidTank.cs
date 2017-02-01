@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoffeeMake.Includes.Types
 {
-    public class Tank : ITank
+    public class LiquidTank : ITank
     {
         public float Capacity { get; private set; }
 
@@ -21,11 +21,15 @@ namespace CoffeeMake.Includes.Types
                 {
                     throw new ArgumentNullException("Składnik jest nullem.");
                 }
+                if (!value.Type.Equals(ComponentType.LIQUID))
+                {
+                    throw new ArgumentException("Skladnik nie jest przeznaczony do tego zbiornika");
+                }
                 _component = value;
             }
         }
 
-        public Tank(Component component)
+        public LiquidTank(Component component)
         {
             Component = component;
             Capacity = 1000;

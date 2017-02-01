@@ -1,5 +1,6 @@
 ﻿using CoffeeMake.Configuration;
 using CoffeeMake.Includes.Types;
+using CoffeeMake.Includes.Types.Tank;
 using CoffeeMake.Interfaces;
 using CoffeeMake.Interfaces.Drink;
 using System;
@@ -16,7 +17,6 @@ namespace CoffeeMake
     {
         private Devices _devices;
         private Tanks _tanks;
-
         public CoffeeMaker()
         {
             _devices = new Devices();
@@ -36,9 +36,9 @@ namespace CoffeeMake
         private void InitializeTanks()
         {
             _tanks = new Tanks();
-            foreach (var component in CurrentConfiguration.Instance.Components)
+            foreach (var component in DbConfiguration.Instance.Components)
             {
-                _tanks.Add(new Tank(component));
+                _tanks.Add(TankFactory.CreateTank(component));
             }
         }
 
@@ -72,18 +72,6 @@ namespace CoffeeMake
                 currentDrink = new WithComponent(currentDrink, item);
             }
             return currentDrink;
-
-            //ITank sugarTank = Tanks.Where(z => z.Component.Name.Equals("cukier")).FirstOrDefault();
-            //if(sugarTank != null)
-            //{
-            //    _devices.Head.AddToCup(sugarTank, _touchScreen.Sugar);
-            //}
-
-            //ITank milkTank = Tanks.Where(z => z.Component.Name.Equals("mleko")).FirstOrDefault();
-            //if(milkTank != null)
-            //{
-            //    _devices.Head.AddToCup(milkTank, _touchScreen.Milk);
-            //}
         }
     }
 }
