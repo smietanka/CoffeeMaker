@@ -42,13 +42,13 @@ namespace CoffeeMake.Configuration
         }
 
         /// <summary>
-        /// Inicjalizuje listę składników i przepisów z bazy danych.
+        /// Inicjalizuje listę składników i przepisów z czegos tam
         /// </summary>
         private void Load()
         {
-            //TODO: pobieranie z bazy danych listy przepisow
+            //TODO: pobieranie listy przepisow z czegos tam
 
-            //TODO: pobieranie z bazy danych listy skladnikow
+            //TODO: pobieranie listy skladnikow z czegos tam
         }
     }
 }
