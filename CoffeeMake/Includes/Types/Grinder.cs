@@ -9,6 +9,12 @@ namespace CoffeeMake.Includes.Types
 {
     public class Grinder : IGrinder
     {
+        /// <summary>
+        /// Mieli skladnik.
+        /// </summary>
+        /// <param name="component">Skladnik. Tylko taki ktory jest mozliwy do zmielenia oraz jest suchy.</param>
+        /// <exception cref="ArgumentNullException">W momencie gdy skladnik jest null.</exception>
+        /// <exception cref="ArgumentException">W momencie gdy podamy skladnik ktory jest nie mozliwy do zmielenia oraz chcemy zmielic ciecz.</exception>
         public void Grind(Component component)
         {
             if(component == null)

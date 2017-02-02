@@ -26,7 +26,7 @@ namespace CoffeeMakeTest
         public void Should_CreateNewObject_WithCorrectParameters()
         {
             Assert.DoesNotThrow(() => {
-                var secondRecipe = new Recipe("asd", new RecipeComponents(new List<ComponentDefinition> { new ComponentDefinition("test", 50, 50) }));
+                var secondRecipe = new Recipe("asd", new RecipeComponents(new List<ComponentDefinition> { new ComponentDefinition(new Component("test", CoffeeMake.Interfaces.ComponentType.DRY, false), 50, 50) }));
                 Assert.IsTrue(secondRecipe.RecipeComponents.Any());                
             });
         }
@@ -38,7 +38,7 @@ namespace CoffeeMakeTest
         {
             get
             {
-                yield return new TestCaseData(null, new RecipeComponents(new List<ComponentDefinition> { new ComponentDefinition("test", 50, 50) }));
+                yield return new TestCaseData(null, new RecipeComponents(new List<ComponentDefinition> { new ComponentDefinition(new Component("test", CoffeeMake.Interfaces.ComponentType.DRY, false), 50, 50) }));
                 yield return new TestCaseData("abc", null);
                 yield return new TestCaseData(null, null);
             }

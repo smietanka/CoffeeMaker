@@ -10,6 +10,10 @@ namespace CoffeeMake.Includes.Types
     public class Recipe
     {
         private string _name;
+        /// <summary>
+        /// Nadaje nazwe
+        /// </summary>
+        /// /// <exception cref="ArgumentNullException">Gdy nazwa jest pusta lub null</exception>
         public string Name
         {
             get { return _name; }
@@ -24,6 +28,11 @@ namespace CoffeeMake.Includes.Types
         }
 
         private RecipeComponents _recipeComponents;
+        /// <summary>
+        /// Nadaje skladniki przepisu
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Gdy skladniki sa nullem</exception>
+        /// <exception cref="ArgumentException">Gdy skladniki sa pusta lista</exception>
         public RecipeComponents RecipeComponents
         {
             get { return _recipeComponents; }
@@ -40,6 +49,11 @@ namespace CoffeeMake.Includes.Types
                 _recipeComponents = value;
             }
         }
+        /// <summary>
+        /// Tworzy przepis z nazwą i listą skladników wykorzystywanych w przepisie.
+        /// </summary>
+        /// <param name="name">Nazwa</param>
+        /// <param name="components"></param>
         public Recipe(string name, RecipeComponents components)
         {
             Name = name;

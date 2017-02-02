@@ -10,6 +10,11 @@ namespace CoffeeMake.Includes.Types
     public class Pump : IPump
     {
         private IHead head;
+        /// <summary>
+        /// Tworzy obiekt z referencja do glowicy
+        /// </summary>
+        /// <param name="head">Glowica</param>
+        /// <exception cref="ArgumentNullException">W momencie gdy glowica jest null</exception>
         public Pump(IHead head)
         {
             if(head == null)
@@ -19,6 +24,10 @@ namespace CoffeeMake.Includes.Types
             this.head = head;
         }
 
+        /// <summary>
+        /// Pompuje skladnik do glowicy
+        /// </summary>
+        /// <param name="component">Skladnik</param>
         public void Pumping(Component component)
         {
             this.head.Add(component);

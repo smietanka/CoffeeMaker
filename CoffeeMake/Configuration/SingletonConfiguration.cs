@@ -7,25 +7,25 @@ using System.Threading.Tasks;
 
 namespace CoffeeMake.Configuration
 {
-    public class DbSingletonConfiguration : IConfiguration
+    public class SingletonConfiguration : IConfiguration
     {
         public Recipes Recipes { get; private set; }
         public Components Components { get; private set; }
 
         private static readonly object _locker = new object();
-        private static DbSingletonConfiguration _instance;
+        private static SingletonConfiguration _instance;
         /// <summary>
         /// Zwraca instancje konfiguracji pobieranej z bazy danych.
         /// </summary>
-        public static DbSingletonConfiguration Instance
+        public static SingletonConfiguration Instance
         {
             get
             {
-                if (_instance == null)
+                lock (_locker)
                 {
-                    lock (_locker)
+                    if (_instance == null)
                     {
-                        _instance = new DbSingletonConfiguration();
+                        _instance = new SingletonConfiguration();
                     }
                 }
                 return _instance;
@@ -34,7 +34,7 @@ namespace CoffeeMake.Configuration
         /// <summary>
         /// Tworzy podstawowe kolekcje oraz ładuje pierwszy raz listę składników.
         /// </summary>
-        private DbSingletonConfiguration()
+        private SingletonConfiguration()
         {
             this.Recipes = new Recipes();
             this.Components = new Components();

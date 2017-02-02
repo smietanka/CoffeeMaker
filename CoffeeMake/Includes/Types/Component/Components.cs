@@ -20,6 +20,7 @@ namespace CoffeeMake.Includes.Types
         /// Tworzy obiekt z wgrana juz lista skladnikow.
         /// </summary>
         /// <param name="paramComp">Lista skladnikow</param>
+        /// <exception cref="ArgumentNullException">Gdy lista jest null</exception>
         public Components(List<Component> paramComp)
         {
             if (paramComp == null)
@@ -30,6 +31,7 @@ namespace CoffeeMake.Includes.Types
         /// Dodaje do listy skladnikow konkretny skladnik
         /// </summary>
         /// <param name="comp"></param>
+        /// <exception cref="ArgumentNullException">W momencie gdy skladnik jest null</exception>
         public void Add(Component comp)
         {
             if(comp == null)

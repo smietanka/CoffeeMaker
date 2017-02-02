@@ -9,6 +9,11 @@ namespace CoffeeMake.Includes.Types.Tank
 {
     public class TankFactory
     {
+        /// <summary>
+        /// Na podstawie skladnika tworzy zbiornik.
+        /// </summary>
+        /// <param name="paramComp">Skladnik</param>
+        /// <returns>Zbiornik na dany skladnik</returns>
         public static ITank CreateTank(Component paramComp)
         {
             if(paramComp == null)

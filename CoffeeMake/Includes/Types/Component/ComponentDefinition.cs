@@ -9,17 +9,17 @@ namespace CoffeeMake.Includes.Types
 {
     public class ComponentDefinition
     {
-        private string _componentName;
-        public string ComponentName
+        private Component _component;
+        public Component Component
         {
-            get { return _componentName; }
+            get { return _component; }
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (value == null)
                 {
                     throw new ArgumentNullException("Nazwa składnika jest pusta lub nullem.");
                 }
-                _componentName = value;
+                _component = value;
             }
         }
 
@@ -56,9 +56,9 @@ namespace CoffeeMake.Includes.Types
         /// <param name="componentName">Nazwa skladnika</param>
         /// <param name="temperature">Temperatura skladnika na jaka podgrzac.</param>
         /// <param name="amount">Ilosc danego skladnika potrzebna do wytworzenia napoju</param>
-        public ComponentDefinition(string componentName, int temperature, int amount)
+        public ComponentDefinition(Component component, int temperature, int amount)
         {
-            ComponentName = componentName;
+            Component = component;
             Temperature = temperature;
             Amount = amount;
         }
@@ -67,9 +67,9 @@ namespace CoffeeMake.Includes.Types
         /// </summary>
         /// <param name="componentName">Nazwa skladnika</param>
         /// <param name="amount">Ilosc danego skladnika potrzebna do wytworzenia napoju</param>
-        public ComponentDefinition(string componentName, int amount)
+        public ComponentDefinition(Component component, int amount)
         {
-            ComponentName = componentName;
+            Component = component;
             Amount = amount;
         }
     }

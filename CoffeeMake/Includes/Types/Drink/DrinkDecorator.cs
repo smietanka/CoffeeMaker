@@ -14,6 +14,7 @@ namespace CoffeeMake.Includes.Types
         /// Bazowy konstruktor.
         /// </summary>
         /// <param name="drink">Napoj ktory bedzie dekorowany</param>
+        /// <exception cref="ArgumentNullException">W momencie gdy napoj jest null</exception>
         public DrinkDecorator(IDrink drink)
         {
             if(drink == null)

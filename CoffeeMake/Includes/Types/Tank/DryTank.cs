@@ -9,28 +9,23 @@ namespace CoffeeMake.Includes.Types.Tank
 {
     public class DryTank : Tank
     {
+        /// <summary>
+        /// Tworzy obiekt zbiornika na skladniki suche.
+        /// </summary>
+        /// <param name="component">Skladnik</param>
+        /// <exception cref="ArgumentNullException">W momencie gdy skladnik jest null</exception>
+        /// <exception cref="ArgumentException">W momencie gdy skladnik jest zlym typem</exception>
         public DryTank(Component component)
             : base(component)
         {
-
-        }
-        public override Component Component
-        {
-            get
+            if(component == null)
             {
-                return base.Component;
+                throw new ArgumentNullException("Skladnik jest null");
             }
-            set
+
+            if(!component.Type.Equals(ComponentType.DRY))
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("Składnik jest nullem.");
-                }
-                if (!value.Type.Equals(ComponentType.DRY))
-                {
-                    throw new ArgumentException("Skladnik nie jest przeznaczony do tego zbiornika");
-                }
-                base.Component = value;
+                 throw new ArgumentException("Skladnik jest zlym typem.");
             }
         }
     }

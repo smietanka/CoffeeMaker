@@ -11,11 +11,18 @@ namespace CoffeeMake.Includes.Types
     {
         List<ComponentDefinition> _compDefinitions;
 
+        /// <summary>
+        /// Tworzy obiekt oraz inicjalizuje pusta liste definicji skladnikow dla przpeisu.
+        /// </summary>
         public RecipeComponents()
         {
             _compDefinitions = new List<ComponentDefinition>();
         }
 
+        /// <summary>
+        /// Tworzy obiekt z lista definicji skladnikow dla przepisu
+        /// </summary>
+        /// <param name="paramDef">lista definicji skladnikow</param>
         public RecipeComponents(List<ComponentDefinition> paramDef)
         {
             if (paramDef == null)

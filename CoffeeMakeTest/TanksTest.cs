@@ -42,12 +42,5 @@ namespace CoffeeMakeTest
             var tanks = new Tanks();
             Assert.DoesNotThrow(() => tanks.Add(new DryTank(new Component("asd", ComponentType.DRY, false))));
         }
-
-        [Test]
-        public void Should_ThrowArgumentException_WhenComponentTypeIsIncorrect()
-        {
-            var tanks = new Tanks();
-            Assert.Throws<ArgumentException>(() => tanks.Add(new DryTank(new Component("asd", ComponentType.LIQUID, false))));
-        } 
     }
 }

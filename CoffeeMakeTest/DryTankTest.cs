@@ -42,11 +42,5 @@ namespace CoffeeMakeTest
             var container = new DryTank(new Component("abc", ComponentType.DRY, false));
             Assert.AreEqual("abc", container.Component.Name);
         }
-
-        [Test]
-        public void Should_ThrowArgumentException_WithIncorrectType()
-        {
-            Assert.Throws<ArgumentException>(() => new DryTank(new Component("abc", ComponentType.LIQUID, false)));
-        }
     }
 }

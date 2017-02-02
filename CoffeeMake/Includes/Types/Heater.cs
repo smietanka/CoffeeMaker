@@ -9,6 +9,14 @@ namespace CoffeeMake.Includes.Types
 {
     public class Heater : IHeater
     {
+        /// <summary>
+        /// Podgrzewa konkretny skladnik
+        /// </summary>
+        /// <param name="component">Skladnik</param>
+        /// <param name="temperature">Temperatura do jakiej podgrzac</param>
+        /// <returns>True jesli podgrzalo prawidlowo</returns>
+        /// <exception cref="ArgumentNullException">Kiedy skladnik jest null</exception>
+        /// <exception cref="ArgumentException">W momencie kiedy podana temperatura jest za niska lub skladnikiem jest skladnik suchy.</exception>
         public bool Heat(Component component, float temperature)
         {
             if(component == null)

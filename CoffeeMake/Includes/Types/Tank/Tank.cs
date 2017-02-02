@@ -9,32 +9,31 @@ namespace CoffeeMake.Includes.Types.Tank
 {
     public abstract class Tank : ITank
     {
-        private Component _component;
-        public virtual Component Component
-        {
-            get { return _component; }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("Składnik jest nullem.");
-                }
-                _component = value;
-            }
-        }
+        public Component Component { get; private set; }
 
         public float Capacity { get; set; }
 
+        /// <summary>
+        /// Tworzy domyslny zbiornik
+        /// </summary>
+        /// <param name="component">Skladnik</param>
         public Tank(Component component)
         {
             Component = component;
         }
+
+        /// <summary>
+        /// Pobiera ze zbiornika ilosc dostepnego skladnika 
+        /// </summary>
+        /// <param name="content">Ilosc do pobrania</param>
+        /// <exception cref="ArgumentException">W momencie gdy chcemy pobrac za duzo zawartosci lub content jest mniejsze od 0</exception>
         public void RemoveContent(float content)
         {
             if (Capacity - content < 0)
             {
                 throw new ArgumentException("Za duzo chcesz pobrac zawartosci.");
             }
+
             if (content < 0)
             {
                 throw new ArgumentException("Wpisana ilość jest za mała.");

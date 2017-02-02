@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace CoffeeMake
 {
-    //TODO: Rozdzielic ComponentDefinition na dwie osobne klasy. z temperatura i bez.
     public class CoffeeMaker
     {
         private Devices _devices;
@@ -31,7 +30,7 @@ namespace CoffeeMake
         private void InitializeTanks()
         {
             _tanks = new Tanks();
-            foreach (var component in DbSingletonConfiguration.Instance.Components)
+            foreach (var component in SingletonConfiguration.Instance.Components)
             {
                 _tanks.Add(TankFactory.CreateTank(component));
             }
@@ -43,24 +42,24 @@ namespace CoffeeMake
             {
                 throw new ArgumentNullException("Przepis jest nullem.");
             }
+
             foreach (ComponentDefinition compDefinition in recipe.RecipeComponents)
             {
-                Component component = _tanks.Where(z => z.Component.Name.Equals(compDefinition.ComponentName)).FirstOrDefault().Component;
-
-                if(component != null)
+                if(compDefinition.Component != null)
                 {
-                    if (component.Grindable)
+                    if (compDefinition.Component.Grindable)
                     {
-                        _devices.Grinder.Grind(component);
+                        _devices.Grinder.Grind(compDefinition.Component);
                     }
 
-                    if (component.Type.Equals(ComponentType.LIQUID))
+                    if (compDefinition.Component.Type.Equals(ComponentType.LIQUID))
                     {
-                        _devices.Heater.Heat(component, compDefinition.Temperature);
+                        _devices.Heater.Heat(compDefinition.Component, compDefinition.Temperature);
                     }
-                    _devices.Pump.Pumping(component);
+                    _devices.Pump.Pumping(compDefinition.Component);
                 }
             }
+
             IDrink currentDrink = new Drink();
             foreach(var item in _devices.Head)
             {

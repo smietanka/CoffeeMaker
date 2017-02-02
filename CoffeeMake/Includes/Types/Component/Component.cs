@@ -10,6 +10,10 @@ namespace CoffeeMake.Includes.Types
     public class Component
     {
         private string _name;
+        /// <summary>
+        /// Zwraca lub nadaje nazwe
+        /// </summary>
+        /// <exception cref="ArgumentNullException">W momencie gdy nazwa jest pusta lub null.</exception>"
         public string Name
         {
             get { return _name; }
@@ -22,12 +26,21 @@ namespace CoffeeMake.Includes.Types
                 _name = value;
             }
         }
-
+        /// <summary>
+        /// Zwraca lub nadaje typ skladnika
+        /// </summary>
         public ComponentType Type { get; private set; }
 
+        /// <summary>
+        /// Zwraca lub nadaje czy skladnik jest mielony
+        /// </summary>
         public bool Grindable { get; private set; }
 
         private float _temperature;
+        /// <summary>
+        /// Temperatura skladnika
+        /// </summary>
+        /// <exception cref="ArgumentException">W momencie nadawania  gdy temperatura jest za niska.</exception>
         public float Temperature
         {
             get { return _temperature; }

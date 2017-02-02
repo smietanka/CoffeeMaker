@@ -11,11 +11,17 @@ namespace CoffeeMake.Includes.Types.Tank
     {
         private List<ITank> _tanks;
 
+        /// <summary>
+        /// Tworzy obiekt oraz inicjalizuje pusta liste zbiornikow.
+        /// </summary>
         public Tanks()
         {
             _tanks = new List<ITank>();
         }
-
+        /// <summary>
+        /// Tworzy obiekt z lista zbiornikow
+        /// </summary>
+        /// <param name="paramTanks">Lista zbiornikow</param>
         public Tanks(List<ITank> paramTanks)
         {
             if (paramTanks == null)
@@ -23,6 +29,10 @@ namespace CoffeeMake.Includes.Types.Tank
             _tanks = paramTanks;
         }
 
+        /// <summary>
+        /// Dodaje do aktualnej listy zbiornik
+        /// </summary>
+        /// <param name="tank">Zbiornik</param>
         public void Add(ITank tank)
         {
             if(tank == null)
